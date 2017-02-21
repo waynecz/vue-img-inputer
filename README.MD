@@ -8,6 +8,8 @@
 + 主题可选
 + 高度可定制
 
+### 适用场景
+因为看了很多uploader都是选择文件直接上传了，所以做个需要配合表单的form-item型的图片输入框
 
 ### [demo请移步](http://waynecz.github.io/VueImgInputer/index.html)
 
