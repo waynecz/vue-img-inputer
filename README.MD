@@ -8,7 +8,6 @@
 + 主题可选
 + 高度可定制
 
--------
 
 ### [demo请移步](http://waynecz.github.io/VueImgInputer/index.html)
 
@@ -48,7 +47,7 @@ export default {
 
 ### 简单的例子
 ```html
-<vu-img-inpiter theme="light" size="large"></vu-img-inpiter>
+<vue-img-inpiter theme="light" size="large"></vue-img-inpiter>
 ```
 
 
