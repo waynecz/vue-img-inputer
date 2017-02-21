@@ -1,0 +1,54 @@
+{
+  "name": "vue-img-inputer",
+  "version": "1.0.11",
+  "author": "Waynecz",
+  "license": "MIT",
+  "description": "基于Vue2的图片输入框",
+  "main": "dist/VueImgInputer.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "webpack -p --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/waynecz/vue-img-inputer"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "keywords": [
+    "file-uploader",
+    "image",
+    "vue",
+    "vuejs",
+    "components",
+    "ui"
+  ],
+  "bugs": {
+    "url": "https://github.com/waynecz/vue-img-inputer/issues"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.4.0",
+    "babel-cli": "^6.3.15",
+    "babel-core": "^6.3.15",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-runtime": "^6.3.13",
+    "babel-preset-es2015": "^6.3.13",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "vue": "^2.1.0",
+    "vue-html-loader": "^1.0.0",
+    "vue-loader": "^10.0.0",
+    "vue-template-compiler": "^2.1.0",
+    "webpack": "^1.13.2"
+  }
+}
