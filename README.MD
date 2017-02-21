@@ -2,10 +2,12 @@
 
 <img src="./src/images/demo.png">
 
-### 预览功能
+## 功能预览
+
 + 图片预览、拖拽、回填、大小限制
 + 主题可选
 + 高度可定制
+
 -------
 
 ### [demo请移步](http://waynecz.github.io/VueImgInputer/index.html)
