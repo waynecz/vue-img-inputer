@@ -23,7 +23,7 @@ Not support Vue.js 1.x
 ## 安装和使用
 
 ```javascript
-npm install vue-img-inputer
+npm install vue-img-inputer -D
 ```
 
 - 作为全局组件使用
@@ -49,7 +49,7 @@ export default {
 
 ### 简单的例子
 ```html
-<vue-img-inpiter theme="light" size="large"></vue-img-inpiter>
+<VueImgInputer theme="light" size="large"></VueImgInputer>
 ```
 
 
