@@ -72,7 +72,7 @@ export default {
 | bottomText | String | 图片选中或回填后鼠标hover显示的下方提示文字| —|点击或拖拽图片以修改|
 | readonlyTipText | String | 只当readonly为true时生效，替代bottomText | —|不可更改|
 | customerIcon | 类似`&#xe624;` | 如果你也在项目中用阿里的iconfont，那么恭喜，你可以通过这个props传入值随意替代icon| —|—|
-| noMask | Boolean | 使组件在图片已选货已回填的情况下hover无信息| —|false|
+| noMask | Boolean | 使组件在图片已选或已回填的情况下hover无信息| —|false|
 | nhe | Boolean | no-hover-effect，使组件hover无效果| —|false|
 
 
