@@ -1,9 +1,9 @@
 {
   "name": "vue-img-inputer",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "author": "Waynecz",
   "license": "MIT",
-  "description": "基于Vue2的图片输入框",
+  "description": "基于Vue2的图片输入框, 图片预览、拖拽、回填、大小限制, 主题可选",
   "main": "dist/VueImgInputer.js",
   "files": [
     "dist"

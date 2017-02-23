@@ -3,7 +3,7 @@
 <img src="./src/images/demo.png">
 
 ## 功能预览
-
++ 图片值双向绑定
 + 图片预览、拖拽、回填、大小限制
 + 主题可选
 + 高度可定制
@@ -49,7 +49,7 @@ export default {
 
 ### 简单的例子
 ```html
-<VueImgInputer theme="light" size="large"></VueImgInputer>
+<VueImgInputer v-model="picValue" theme="light" size="large"></VueImgInputer>
 ```
 
 
