@@ -60,7 +60,7 @@ export default {
 | 参数    | 类型    | 说明   |  可选值 | 默认值 |
 | ------------- |-------| -----| ----| -------|
 | v-model | — | 选中的文件| —|—|
-| onChange  | Function | 文件更改时可触发的回调（可选） | —|—|
+| onChange  | Function | 文件更改时触发的回调，参数分别是(file, filePath)， 其中filePath为伪路径 | —|—|
 | placeholder | String | 占位符| —|点击或拖拽选择图片|
 | maxSize | Number | 图片的最大值(KB)| —|5120|
 | imgSrc | String |  图片回填时展示的图片地址| —|—|

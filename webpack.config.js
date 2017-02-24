@@ -50,5 +50,6 @@ module.exports = {
         postcss: [
             require('autoprefixer')()
         ],
-    }
+    },
+    watch: true
 }

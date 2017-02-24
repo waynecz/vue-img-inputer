@@ -139,6 +139,7 @@
                     if (this.readonly) return false;
                     this.errText = '';
                     let fileList = e.dataTransfer.files;
+                    console.log('path:' + fileList[0].path);
                     if (fileList.length === 0) {
                         return false
                     }
@@ -186,7 +187,8 @@
                 this.$emit('input', this.file);
 
                 // 文件选择回调
-                this.onChange && this.onChange(this.file);
+                this.onChange && this.onChange(this.file, inputDOM.value);
+                console.log(this.file);
 
                 this.imgPreview(this.file);
 
