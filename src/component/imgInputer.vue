@@ -119,7 +119,7 @@
             if (this.imgSrc) {
                 this.dataUrl = this.imgSrc;
             }
-            // 组织浏览器默认的拖拽时事件
+            // 阻止浏览器默认的拖拽时事件
             ['dragleave', 'drop', 'dragenter', 'dragover'].forEach(e => {
                 this.preventDefaultEvent(e);
             });
@@ -139,7 +139,7 @@
                     if (this.readonly) return false;
                     this.errText = '';
                     let fileList = e.dataTransfer.files;
-                    console.log('path:' + fileList[0].path);
+
                     if (fileList.length === 0) {
                         return false
                     }
@@ -188,7 +188,6 @@
 
                 // 文件选择回调
                 this.onChange && this.onChange(this.file, inputDOM.value);
-                console.log(this.file);
 
                 this.imgPreview(this.file);
 
@@ -263,3 +262,5 @@
 <style lang="less">
     @import "../style/main.less";
 </style>
+
+<template></template>

@@ -93,7 +93,8 @@ export default {
 [@OYsun](https://github.com/OYsun), 项目结构和文档基本受OYsun启发，谢谢！
 
 ## 兼容性
-IE9+
+PC: IE10+
+Mobile: 放心用吧
 
 ## bug和建议
 
