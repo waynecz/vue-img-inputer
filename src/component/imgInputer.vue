@@ -262,5 +262,3 @@
 <style lang="less">
     @import "../style/main.less";
 </style>
-
-<template></template>
