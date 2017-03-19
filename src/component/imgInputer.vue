@@ -63,6 +63,10 @@
             theme: {
                 type: String,
                 default: ''
+            },
+            name: {
+                type: String,
+                default: 'file'
             }
 
         },
@@ -247,6 +251,7 @@
         <input
                 ref="inputer"
                 type="file"
+                :name="name"
                 :id="inputId"
                 accept="image/*,video/*;"
                 capture="video"
