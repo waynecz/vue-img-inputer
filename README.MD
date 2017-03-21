@@ -11,9 +11,13 @@
 ### 适用场景
 因为看了很多uploader都是选择文件直接上传了，所以做个需要配合表单的form-item型的图片输入框
 
+### 关于各功能实现
+
+[从0开始做一个的Vue图片/ 文件选择(上传)组件--基础向](https://segmentfault.com/a/1190000008503338)
+
 ### [demo请移步](http://waynecz.github.io/VueImgInputer/index.html)
 
-##Support
+## Support
 
 Support Vue.js 2.0+
 
@@ -94,6 +98,7 @@ export default {
 
 ## 兼容性
 PC: IE10+
+
 Mobile: 放心用吧
 
 ## bug和建议
