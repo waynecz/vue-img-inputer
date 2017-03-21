@@ -78,6 +78,7 @@ export default {
 | customerIcon | 类似`&#xe624;` | 如果你也在项目中用阿里的iconfont，那么恭喜，你可以通过这个props传入值随意替代icon| —|—|
 | noMask | Boolean | 使组件在图片已选或已回填的情况下hover无信息| —|false|
 | nhe | Boolean | no-hover-effect，使组件hover无效果| —|false|
+| name| String | input 框的 name 属性值 | - | file |
 
 
 ## 关于扩展
