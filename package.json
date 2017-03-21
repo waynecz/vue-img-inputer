@@ -1,6 +1,6 @@
 {
   "name": "vue-img-inputer",
-  "version": "1.0.23",
+  "version": "1.0.3",
   "author": "Waynecz",
   "license": "MIT",
   "description": "基于Vue2的图片输入框, 图片预览、拖拽、回填、大小限制, 主题可选",

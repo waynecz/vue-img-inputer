@@ -192,6 +192,7 @@
 
                 // 文件选择回调
                 this.onChange && this.onChange(this.file, inputDOM.value);
+                this.$emit('onChange', this.file)
 
                 this.imgPreview(this.file);
 
