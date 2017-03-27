@@ -2,7 +2,7 @@
 
 <img src="./src/images/demo.png">
 
-## [中文文档](https://github.com/waynecz/vue-img-inputer/README-CN.MD)
+## [中文文档](https://github.com/waynecz/vue-img-inputer/blob/master/README-CN.MD)
 
 ## Features
 + Bind value with `v-model`
