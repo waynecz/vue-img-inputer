@@ -71,15 +71,15 @@ export default {
 | readonly | Boolean | readonly，it will be `true` while `imgSrc` was not empty| —|false|
 | bottomText | String | text in the bottom while select a pic && hover component| —|点击或拖拽图片以修改|
 | readonlyTipText | String | only when readonly was `true` was effective，replace `bottomText` | —|不可更改|
-| customerIcon | 类似`&#xe624;` | if you use iconfont of alibaba，Congratulations! you can use this prop set any value to replace component's own icon | —|—|
-| noMask | Boolean | 使组件在图片已选或已回填的情况下hover无信息| —|false|
+| customerIcon | like `&#xe624;` | if you use iconfont of alibaba，Congratulations! you can use this prop set any value to replace component's own icon | —|—|
+| noMask | Boolean | remove info mask while hover| —|false|
 | nhe | Boolean | no-hover-effect| —|false|
 | name| String | name of input, the same as `name` in `input`  | - | file |
 
 
 ## Style
 
-+ CSS was under [BEM](http://www.w3cplus.com/css/bem-definitions.html) style，so you can customize your own `size` & `theme` in easy way
++ CSS was under [BEM](http://www.w3cplus.com/css/bem-definitions.html) style，so you can customize your own `size` & `theme` in an easy way
 
 ## TODO
 
