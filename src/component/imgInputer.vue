@@ -154,15 +154,6 @@
           }
           /**
            * TODO
-           * 未来打算支持各种文件类型
-           * Intend to support any fileType
-           */
-          if (fileList[0].type.indexOf('image') === -1) {
-            this.errText = '请选择图片文件';
-            return false;
-          }
-          /**
-           * TODO
            * 未来打算支持多文件
            * Intend to support muti-file
            */
@@ -170,7 +161,7 @@
             this.errText = '暂不支持多文件';
             return false
           }
-          this.handleFileChange(null, fileList[0]);
+          this.handleFileChange(fileList);
         })
       },
       gengerateID () {
@@ -181,14 +172,20 @@
           return this.gengerateID()
         }
       },
-      handleFileChange (e, FILE) {
-        let inputDOM = this.$refs.inputer;
-        this.file = FILE || inputDOM.files[0];
-        this.errText = '';
+      handleFileChange (e) {
+        if (typeof e.target === 'undefined') this.file = e[0];
+        else this.file = e.target.files[0];
 
+        this.errText = '';
         let size = Math.floor(this.file.size / 1024);
         if (size > this.maxSize) {
           this.errText = `文件大小不能超过${this.sizeHumanRead}`;
+          return false
+        }
+        let accept = this.accept.split(',');
+        if (accept.indexOf(this.file.type) === -1) {
+          //扩展名不合法
+          this.errText = `请选择正确类型的文件`;
           return false
         }
 
@@ -196,14 +193,14 @@
         this.$emit('input', this.file);
 
         // 文件选择回调
-        this.onChange && this.onChange(this.file, inputDOM.value);
-        this.$emit('onChange', this.file)
+        this.onChange && this.onChange(this.file, e.target.value);
+        this.$emit('onChange', this.file);
 
         this.imgPreview(this.file);
 
         this.fileName = this.file.name;
 
-        this.resetInput()
+        this.resetInput();
       },
       imgPreview (file) {
         let self = this;
