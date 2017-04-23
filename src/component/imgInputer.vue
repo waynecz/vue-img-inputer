@@ -202,6 +202,8 @@
         this.imgPreview(this.file);
 
         this.fileName = this.file.name;
+
+        this.resetInput()
       },
       imgPreview (file) {
         let self = this;
@@ -217,6 +219,31 @@
           }
 
         }
+      },
+      resetInput () {
+        let input = document.getElementById(this.inputId);
+        let form = document.createElement('form');
+
+        document.body.appendChild(form);
+
+        let parentNode = input.parentNode;
+        // 判断input 是否为最后一个节点
+        let isLastNode = parentNode.lastChild === input;
+        let nextSibling;
+        // 如果后面还有节点，则记录下一个node，做位置标志
+        // 如果本身已经是最后一个节点，则直接通过parentNode appendChild即可
+        if (!isLastNode) {
+          nextSibling = input.nextSibling;
+        }
+
+        form.appendChild(input);
+        form.reset();
+
+        isLastNode
+          ? parentNode.appendChild(input)
+          : parentNode.insertBefore(input,nextSibling);
+
+        document.body.removeChild(form);
       }
     },
     watch: {
