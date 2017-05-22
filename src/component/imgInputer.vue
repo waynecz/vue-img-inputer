@@ -10,6 +10,10 @@
         default: 'image/*,video/*;',
         type: String
       },
+      capture: {
+        default: true,
+        type: Boolean
+      },
       id: {
         default: '',
         type: String
@@ -238,7 +242,7 @@
 
         isLastNode
           ? parentNode.appendChild(input)
-          : parentNode.insertBefore(input,nextSibling);
+          : parentNode.insertBefore(input, nextSibling);
 
         document.body.removeChild(form);
       }
@@ -279,14 +283,25 @@
     </div>
     <!-- input主体-->
     <input
-        ref="inputer"
-        type="file"
-        :name="name"
-        :id="inputId"
-        :accept="accept"
-        capture="video"
-        class="img-inputer__inputer"
-        @change="handleFileChange"
+            ref="inputer"
+            v-if="capture"
+            type="file"
+            :name="name"
+            :id="inputId"
+            :accept="accept"
+            capture="video"
+            class="img-inputer__inputer"
+            @change="handleFileChange"
+    />
+    <input
+            ref="inputer"
+            v-else
+            type="file"
+            :name="name"
+            :id="inputId"
+            :accept="accept"
+            class="img-inputer__inputer"
+            @change="handleFileChange"
     />
     <transition name="fade">
       <div class="img-inputer__err" v-if="errText.length">{{errText}}</div>
