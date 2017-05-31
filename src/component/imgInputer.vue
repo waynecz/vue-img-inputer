@@ -1,5 +1,7 @@
 <script type="text/ecmascript-6">
+  /* eslint-disable */
   export default {
+    name: 'vue-img-inputer',
     props: {
       type: {
         default: 'img',
@@ -90,31 +92,31 @@
     },
     computed: {
       imgSelected () {
-        return !!this.dataUrl || !!this.fileName
+        return !!this.dataUrl || !!this.fileName;
       },
       sizeHumanRead () {
         let rst = 0;
         if (this.maxSize < 1024) {
-          rst = this.maxSize + 'K'
+          rst = this.maxSize + 'K';
         } else {
-          rst = (this.maxSize / 1024).toFixed(this.maxSize % 1024 > 0 ? 2 : 0) + 'M'
+          rst = (this.maxSize / 1024).toFixed(this.maxSize % 1024 > 0 ? 2 : 0) + 'M';
         }
-        return rst
+        return rst;
       },
       sizeClass () {
         if (this.size) {
-          return `img-inputer--${this.size}`
+          return `img-inputer--${this.size}`;
         }
       },
       themeClass () {
-        return `img-inputer--${this.theme}`
+        return `img-inputer--${this.theme}`;
       },
       ICON () {
         let rst = '';
         if (this.icon) {
-          rst = this.icon
+          rst = this.icon;
         } else {
-          rst = (this.theme == 'light' ? 'img' : 'clip')
+          rst = (this.theme == 'light' ? 'img' : 'clip');
         }
         return rst
       },
@@ -143,7 +145,7 @@
       preventDefaultEvent (eventName) {
         document.addEventListener(eventName, function (e) {
           e.preventDefault();
-        }, false)
+        }, false);
       },
       addDropSupport () {
         let BOX = this.$refs.box;
@@ -154,7 +156,7 @@
           let fileList = e.dataTransfer.files;
 
           if (fileList.length === 0) {
-            return false
+            return false;
           }
           /**
            * TODO
@@ -171,9 +173,9 @@
       gengerateID () {
         let nonstr = Math.random().toString(36).substring(3, 8);
         if (!document.getElementById(nonstr)) {
-          return nonstr
+          return nonstr;
         } else {
-          return this.gengerateID()
+          return this.gengerateID();
         }
       },
       handleFileChange (e) {
@@ -186,19 +188,13 @@
           this.errText = `文件大小不能超过${this.sizeHumanRead}`;
           return false
         }
-        let accept = this.accept.split(',');
-        if (accept.indexOf(this.file.type) === -1) {
-          //扩展名不合法
-          this.errText = `请选择正确类型的文件`;
-          return false
-        }
 
         // 双向绑定
         this.$emit('input', this.file);
 
-        // 文件选择回调
-        this.onChange && this.onChange(this.file, e.target.value);
-        this.$emit('onChange', this.file);
+        // 文件选择回调 && 两种绑定方式
+        this.onChange && this.onChange(this.file, this.file.name);
+        this.$emit('onChange', this.file, this.file.name);
 
         this.imgPreview(this.file);
 
@@ -259,7 +255,7 @@
           this.file = [];
           this.dataUrl = '';
           this.errText = '';
-          this.fileName = ''
+          this.fileName = '';
         }
       }
     }
@@ -283,25 +279,25 @@
     </div>
     <!-- input主体-->
     <input
-            ref="inputer"
-            v-if="capture"
-            type="file"
-            :name="name"
-            :id="inputId"
-            :accept="accept"
-            capture="video"
-            class="img-inputer__inputer"
-            @change="handleFileChange"
+        ref="inputer"
+        v-if="capture"
+        type="file"
+        :name="name"
+        :id="inputId"
+        :accept="accept"
+        capture="video"
+        class="img-inputer__inputer"
+        @change="handleFileChange"
     />
     <input
-            ref="inputer"
-            v-else
-            type="file"
-            :name="name"
-            :id="inputId"
-            :accept="accept"
-            class="img-inputer__inputer"
-            @change="handleFileChange"
+        ref="inputer"
+        v-else
+        type="file"
+        :name="name"
+        :id="inputId"
+        :accept="accept"
+        class="img-inputer__inputer"
+        @change="handleFileChange"
     />
     <transition name="fade">
       <div class="img-inputer__err" v-if="errText.length">{{errText}}</div>
@@ -309,6 +305,6 @@
   </div>
 </template>
 
-<style lang="less">
-  @import "../style/main.less";
+<style lang="scss">
+  @import "../style/main.scss";
 </style>

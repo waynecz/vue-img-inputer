@@ -1,2 +1,2 @@
-import VueImgInputer from './component/imgInputer.vue'
-module.exports = VueImgInputer;
+import VueImgInputer from './component/imgInputer.vue';
+export default VueImgInputer;

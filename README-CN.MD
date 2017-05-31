@@ -25,6 +25,15 @@ Support Vue.js 2.0+
 
 Not support Vue.js 1.x
 
+## 开发
+
+```bash
+// 开发及 demo 预览
+npm start
+
+// 打包
+npm run build
+```
 
 ## 安装和使用
 
@@ -67,7 +76,7 @@ export default {
 | ------------- |-------| -----| ----| -------|
 | v-model | — | 选中的文件| —|—|
 | accept | String | 接收文件类型，建议具体化不要用*匹配，否则可能导致选择框弹出时间很长的问题| —| image/\*,video/\*; |
-| onChange  | Function | 文件更改时触发的回调，参数分别是(file, filePath)， 其中filePath为伪路径 | —|—|
+| onChange  | Function | 文件更改时触发的回调，参数分别是(file, fileName) | —|—|
 | placeholder | String | 占位符| —|点击或拖拽选择图片|
 | maxSize | Number | 图片的最大值(KB)| —|5120|
 | imgSrc | String |  图片回填时展示的图片地址| —|—|
@@ -105,7 +114,7 @@ Mobile: 放心用吧
 
 ## bug和建议
 
-如果在使用中遇到问题或者建议，欢迎提`issues`
+如果在使用中遇到问题或者建议，欢迎提`issues`和`pull request`
 
 ## LICENSE
 

@@ -21,6 +21,15 @@ Support Vue.js 2.0+
 
 Not support Vue.js 1.x
 
+## develop
+
+```bash
+// for develop
+npm start
+
+// for build
+npm run build
+```
 
 ## Install & Useage
 
@@ -60,14 +69,14 @@ export default {
 | ------------- |-------| -----| ----| -------|
 | v-model | — | the file was selected| —|—|
 | accept | String | the same as `accept` in `input`，suggest to set a specific value like `image/jpg,image/gif;`, value as `image/*` will cause a problem that File-checkbox come out after a long time| —| image/\*,video/\*; |
-| onChange  | Function | callback trigger after file selected，params: {file, filePath}， filePath is fakepath of file | —|—|
+| onChange  | Function | callback trigger after file selected，params: {file, fileName} | —|—|
 | placeholder | String | placeholder| —|点击或拖拽选择图片|
 | maxSize | Number | max-size of pic (KB)| —|5120|
 | imgSrc | String |  use VueImgInputer as `img` tag, you should assign a src of img :)| —|—|
 | id | String | input's unique ID，assign it when you need to operate DOM, otherwise it will automatic generate a random string in 4 length to be it's ID| —| random string in 4 length |
 | theme | String | theme| light,material|material|
 | size | String | size| small,large|normal|
-| icon | String | icon| img,clip,img2|clip,当theme为light时为img|
+| icon | String | icon| img,clip,img2|clip,when theme is light, default is img|
 | readonly | Boolean | readonly，it will be `true` while `imgSrc` was not empty| —|false|
 | bottomText | String | text in the bottom while select a pic && hover component| —|点击或拖拽图片以修改|
 | readonlyTipText | String | only when readonly was `true` was effective，replace `bottomText` | —|不可更改|
@@ -87,7 +96,7 @@ export default {
 
 ## Compatibility
 
-PC: IE10+
+PC: IE10 +
 
 Mobile: be happy to use
 
