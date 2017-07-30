@@ -14,7 +14,7 @@
     <imgInputer v-model="file" accept="image/*" placeholder="请选择身份证" @onChange="fileChange"></imgInputer>
     <h1><code>placeholder="..."</code></h1>
 
-    <imgInputer v-model="file" accept="image/*" imgSrc="http://7xntdk.com1.z0.glb.clouddn.com/2.jpg" @onChange="fileChange"></imgInputer>
+    <imgInputer v-model="file" accept="image/*" :imgSrc="cloudImg" @onChange="fileChange"></imgInputer>
     <h1><code>imgSrc="..."</code></h1>
 
     <imgInputer v-model="file" accept="image/*" readonly imgSrc="http://7xntdk.com1.z0.glb.clouddn.com/11.jpg" @onChange="fileChange"></imgInputer>
@@ -45,8 +45,14 @@
     },
     data() {
       return {
-        file: null
+        file: null,
+        cloudImg: ''
       };
+    },
+    mounted() {
+      setTimeout(() => {
+        this.cloudImg = 'http://7xntdk.com1.z0.glb.clouddn.com/2.jpg';
+      }, 2000);
     },
     methods: {
       fileChange(file, name) {
