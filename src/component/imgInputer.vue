@@ -299,12 +299,12 @@
         class="img-inputer__inputer"
         @change="handleFileChange"
     />
-    <transition name="fade">
+    <transition name="vip-fade">
       <div class="img-inputer__err" v-if="errText.length">{{errText}}</div>
     </transition>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../style/main.scss";
 </style>
