@@ -79,7 +79,6 @@
         type: String,
         default: 'file'
       }
-
     },
     data () {
       return {
@@ -245,8 +244,12 @@
     },
     watch: {
       imgSrc (newval, oldval) {
-        if (newval) {
-          this.dataUrl = newval;
+        this.dataUrl = newval;
+
+        if (!newval) {
+          this.file = [];
+          this.errText = '';
+          this.fileName = '';
         }
       },
       value (newval, oldval) {
@@ -305,6 +308,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../style/main.scss";
 </style>
