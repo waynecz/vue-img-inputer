@@ -1,5 +1,48 @@
+<template>
+  <div class="img-inputer" :class="[themeClass, sizeClass, nhe ? 'nhe': '', ]" ref="box">
+    <i class="iconfont img-inputer__icon" v-html="iconUnicode"></i>
+    <p class="img-inputer__placeholder">{{placeholder}}</p>
+
+    <div class="img-inputer__preview-box" v-if="imgSelected">
+      <img :src="dataUrl" class="img-inputer__preview-img">
+    </div>
+    <label :for="readonly ? '' : inputId" class="img-inputer__label"></label>
+    <!-- 图片或文件选择后鼠标移入的提示-->
+    <div class="img-inputer__mask" v-if="imgSelected && !noMask">
+      <p class="img-inputer__file-name">{{fileName}}</p>
+      <p class="img-inputer__change" v-if="readonly">{{readonlyTipText}}</p>
+      <p class="img-inputer__change" v-else>{{bottomText}}</p>
+    </div>
+    <!-- input主体-->
+    <input
+        ref="inputer"
+        v-if="capture"
+        type="file"
+        :name="name"
+        :id="inputId"
+        :accept="accept"
+        capture="video"
+        class="img-inputer__inputer"
+        @change="handleFileChange"
+    />
+    <input
+        ref="inputer"
+        v-else
+        type="file"
+        :name="name"
+        :id="inputId"
+        :accept="accept"
+        class="img-inputer__inputer"
+        @change="handleFileChange"
+    />
+    <transition name="vip-fade">
+      <div class="img-inputer__err" v-if="errText.length">{{errText}}</div>
+    </transition>
+  </div>
+</template>
+
+
 <script type="text/ecmascript-6">
-  /* eslint-disable */
   export default {
     name: 'vue-img-inputer',
     props: {
@@ -110,14 +153,17 @@
       themeClass () {
         return `img-inputer--${this.theme}`;
       },
+      /**
+       * @return {string}
+       */
       ICON () {
         let rst = '';
         if (this.icon) {
           rst = this.icon;
         } else {
-          rst = (this.theme == 'light' ? 'img' : 'clip');
+          rst = (this.theme === 'light' ? 'img' : 'clip');
         }
-        return rst
+        return rst;
       },
       iconUnicode () {
         let iconMap = {
@@ -148,6 +194,7 @@
       },
       addDropSupport () {
         let BOX = this.$refs.box;
+
         BOX.addEventListener('drop', (e) => {
           e.preventDefault();
           if (this.readonly) return false;
@@ -157,15 +204,12 @@
           if (fileList.length === 0) {
             return false;
           }
-          /**
-           * TODO
-           * 未来打算支持多文件
-           * Intend to support muti-file
-           */
+
           if (fileList.length > 1) {
             this.errText = '暂不支持多文件';
             return false
           }
+
           this.handleFileChange(fileList);
         })
       },
@@ -207,7 +251,7 @@
         if (!file || !window.FileReader) return;
 
         if (/^image/.test(file.type)) {
-          var reader = new FileReader();
+          let reader = new FileReader();
           reader.readAsDataURL(file);
 
           reader.onloadend = function () {
@@ -226,6 +270,7 @@
         // 判断input 是否为最后一个节点
         let isLastNode = parentNode.lastChild === input;
         let nextSibling;
+
         // 如果后面还有节点，则记录下一个node，做位置标志
         // 如果本身已经是最后一个节点，则直接通过parentNode appendChild即可
         if (!isLastNode) {
@@ -243,7 +288,7 @@
       }
     },
     watch: {
-      imgSrc (newval, oldval) {
+      imgSrc (newval) {
         this.dataUrl = newval;
 
         if (!newval) {
@@ -252,6 +297,7 @@
           this.fileName = '';
         }
       },
+
       value (newval, oldval) {
         // 重置逻辑
         if (oldval && !newval) {
@@ -264,49 +310,6 @@
     }
   };
 </script>
-
-<template>
-  <div class="img-inputer" :class="[themeClass, sizeClass, nhe ? 'nhe': '', ]" ref="box">
-    <i class="iconfont img-inputer__icon" v-html="iconUnicode"></i>
-    <p class="img-inputer__placeholder">{{placeholder}}</p>
-
-    <div class="img-inputer__preview-box" v-if="imgSelected">
-      <img :src="dataUrl" class="img-inputer__preview-img">
-    </div>
-    <label :for="readonly ? '' : inputId" class="img-inputer__label"></label>
-    <!-- 图片或文件选择后鼠标移入的提示-->
-    <div class="img-inputer__mask" v-if="imgSelected && !noMask">
-      <p class="img-inputer__file-name">{{fileName}}</p>
-      <p class="img-inputer__change" v-if="readonly">{{readonlyTipText}}</p>
-      <p class="img-inputer__change" v-else>{{bottomText}}</p>
-    </div>
-    <!-- input主体-->
-    <input
-        ref="inputer"
-        v-if="capture"
-        type="file"
-        :name="name"
-        :id="inputId"
-        :accept="accept"
-        capture="video"
-        class="img-inputer__inputer"
-        @change="handleFileChange"
-    />
-    <input
-        ref="inputer"
-        v-else
-        type="file"
-        :name="name"
-        :id="inputId"
-        :accept="accept"
-        class="img-inputer__inputer"
-        @change="handleFileChange"
-    />
-    <transition name="vip-fade">
-      <div class="img-inputer__err" v-if="errText.length">{{errText}}</div>
-    </transition>
-  </div>
-</template>
 
 <style lang="scss">
   @import "../style/main.scss";

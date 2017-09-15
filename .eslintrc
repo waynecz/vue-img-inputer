@@ -1,0 +1,11 @@
+{
+  "extends": "eslint-config-elemefe",
+  "plugins": ["vue"],
+  "globals": {
+    "Promise": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "generator-star-spacing": 0
+  }
+}
