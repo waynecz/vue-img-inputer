@@ -1,5 +1,3 @@
-# Vue-Img-Inputer
-
 <img src="./src/images/demo.png">
 
 ## [中文文档](https://github.com/waynecz/vue-img-inputer/blob/master/README-CN.MD)
