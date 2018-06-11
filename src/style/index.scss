@@ -1,4 +1,4 @@
-@import "../fonts/iconfont";
+@import './iconfont';
 
 .img-inputer {
   position: relative;
@@ -7,8 +7,8 @@
   height: 150px;
   border-radius: 5px;
   background: #f0f0f0;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, .117647), 0 1px 4px rgba(0, 0, 0, .117647);
-  transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.117647), 0 1px 4px rgba(0, 0, 0, 0.117647);
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   &--small {
     width: 160px;
@@ -31,11 +31,12 @@
 
   &:hover {
     transform: scale(1.015);
-    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+      0 2px 4px -1px rgba(0, 0, 0, 0.3);
   }
   &.nhe:hover {
     transform: scale(1);
-    box-shadow: 0 1px 6px rgba(0, 0, 0, .117647), 0 1px 4px rgba(0, 0, 0, .117647);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.117647), 0 1px 4px rgba(0, 0, 0, 0.117647);
   }
 
   &--light {
@@ -123,7 +124,7 @@
     bottom: 0;
     border-radius: 5px;
     text-align: center;
-    background: rgba(0, 0, 0, .22);
+    background: rgba(0, 0, 0, 0.22);
   }
 
   &__file-name {
@@ -144,7 +145,7 @@
     margin: 0;
     font-size: 12px;
     border-radius: 0 0 5px 5px;
-    background: rgba(0, 0, 0, .7);
+    background: rgba(0, 0, 0, 0.7);
     text-align: center;
     color: white;
     width: 100%;
@@ -161,11 +162,13 @@
 }
 
 .vip-fade {
-  &-enter-active, &-leave-active {
-    transition: .15s cubic-bezier(0.4, 0.0, 0.2, 1);
+  &-enter-active,
+  &-leave-active {
+    transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: trnsform;
   }
-  &-enter, &-leave-active {
+  &-enter,
+  &-leave-active {
     opacity: 0;
     transform: translateX(30%);
   }

@@ -42,7 +42,7 @@
 </template>
 
 
-<script type="text/ecmascript-6">
+<script>
   export default {
     name: 'vue-img-inputer',
     props: {
@@ -310,7 +310,3 @@
     }
   };
 </script>
-
-<style lang="scss">
-  @import "../style/main.scss";
-</style>
