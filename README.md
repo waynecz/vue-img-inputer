@@ -1,89 +1,66 @@
 <img src="./src/images/demo.png">
 
+<br>
+
+![GitHub release](https://img.shields.io/badge/release-v2.0.0-orange.svg?style=for-the-badge)
+![Bili](https://img.shields.io/badge/bili-3-pink.svg?style=for-the-badge)
+
+<br>
+
 ## [中文文档](https://github.com/waynecz/vue-img-inputer/blob/master/README-CN.MD)
 
-## Features
+## Intro
 
-* Support Pic preview/drop-select/max-size
-* Two themes
+- `<input type="file">` like, only support single image
+- drop-select / preview
+- two skins
 
-### Brief
-
-Just like a `<input type="file"/>`
+<br>
 
 ### [Take a look at Demo](http://waynecz.github.io/VueImgInputer/index.html)
 
-## Support
+<br>
 
-Vue 2.0+
-
-## Develop
-
-```bash
-// develop
-npm start
-
-// build
-npm run build
-```
-
-## Install & Useage
+### Install
 
 ```bash
 npm install vue-img-inputer -D
 ```
 
-* As global component
-
 ```javascript
-// in entry file
-import Vue from 'vue'
-import VueImgInputer from 'vue-img-inputer'
-Vue.component('VueImgInputer', VueImgInputer)
+// In entry file
+import ImgInputer from 'vue-img-inputer'
+import 'vue-img-inputer/dist/index.css'
+
+Vue.component('ImgInputer', ImgInputer)
 ```
 
-* As partial component
-
-```javascript
-// in some component
-import VueImgInputer from 'vue-img-inputer'
-export default {
-  components: {
-    VueImgInputer
-  }
-}
-```
-
-### Sample
+### Usage
 
 ```html
-<VueImgInputer v-model="picValue" theme="light" size="large"></VueImgInputer>
+<img-inputer v-model="file" theme="light" size="large"/>
 ```
 
-## Props
+<br>
 
-| Name            | Type            | Description                                                                                                                                                                         | Optional value | Default                                  |
-| --------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ---------------------------------------- |
-| v-model         | —               | the file was selected                                                                                                                                                               | —              | —                                        |
-| accept          | String          | the same as `accept` in `input`，suggest to set a specific value like `image/jpg,image/gif;`, value as `image/*` will cause a problem that File-checkbox come out after a long time | —              | image/\*,video/\*;                       |
-| onChange        | Function        | callback trigger after file selected，params: {file, fileName}                                                                                                                      | —              | —                                        |
-| placeholder     | String          | placeholder                                                                                                                                                                         | —              | 点击或拖拽选择图片                       |
-| maxSize         | Number          | max-size of pic (KB)                                                                                                                                                                | —              | 5120                                     |
-| imgSrc          | String          | use VueImgInputer as `img` tag, you should assign a src of img :)                                                                                                                   | —              | —                                        |
-| id              | String          | input's unique ID，assign it when you need to operate DOM, otherwise it will automatic generate a random string in 4 length to be it's ID                                           | —              | random string in 4 length                |
-| theme           | String          | theme                                                                                                                                                                               | light,material | material                                 |
-| size            | String          | size                                                                                                                                                                                | small,large    | normal                                   |
-| icon            | String          | icon                                                                                                                                                                                | img,clip,img2  | clip,when theme is light, default is img |
-| readonly        | Boolean         | readonly，it will be `true` while `imgSrc` was not empty                                                                                                                            | —              | false                                    |
-| bottomText      | String          | text in the bottom while select a pic && hover component                                                                                                                            | —              | 点击或拖拽图片以修改                     |
-| readonlyTipText | String          | only when readonly was `true` was effective，replace `bottomText`                                                                                                                   | —              | 不可更改                                 |
-| customerIcon    | like `&#xe624;` | if you use iconfont of alibaba，Congratulations! you can use this prop set any value to replace component's own icon                                                                | —              | —                                        |
-| noMask          | Boolean         | remove info mask while hover                                                                                                                                                        | —              | false                                    |
-| nhe             | Boolean         | no-hover-effect                                                                                                                                                                     | —              | false                                    |
-| name            | String          | name of input, the same as `name` in `input`                                                                                                                                        | -              | file                                     |
+### Props
 
-## Compatibility
-
-PC: IE10 +
-
-Mobile: be happy to use
+| Name                | Type     | Description                                                                                               | Optional value | Default                   |
+| ------------------- | -------- | --------------------------------------------------------------------------------------------------------- | -------------- | ------------------------- |
+| `v-model`           | —        | the file was selected                                                                                     | —              | —                         |
+| `accept`            | String   | suggest to set a specific value like `image/jpg,image/gif;`, value as `image/*` may cause a serious delay | —              | image/\*,video/\*;        |
+| `on-change`         | Function | callback trigger after file changed, params: {file, fileName}                                             | —              | —                         |
+| `placeholder`       | String   | placeholder                                                                                               | —              | 点击或拖拽选择图片        |
+| `max-size`          | Number   | max-size of image (KB)                                                                                    | —              | 5120                      |
+| `img-src`           | String   | `<img src="img-src"/>` like                                                                               | —              | —                         |
+| `id`                | String   | input's unique ID，assign it when you need to                                                             | —              | random string in 4 length |
+| `theme`             | String   | -                                                                                                         | light,material | material                  |
+| `size`              | String   | -                                                                                                         | small,large    | normal                    |
+| `icon`              | String   | -                                                                                                         | img,clip,img2  | clip                      |
+| `readonly`          | Boolean  | -                                                                                                         | —              | false                     |
+| `bottom-text`       | String   | text in the bottom when hover                                                                             | —              | 点击或拖拽图片以修改      |
+| `readonly-tip-text` | String   | visible when readonly, cover `bottom-text`                                                                | —              | 不可更改                  |
+| `customer-icon`     | String   | if you use iconfont, use this prop set any icon such as `&#xe624;`                                        | —              | —                         |
+| `no-mask`           | Boolean  | remove mask while hover                                                                                   | —              | false                     |
+| `no-hover-effect`   | Boolean  | -                                                                                                         | —              | false                     |
+| `name`              | String   | name of input, the same as `name` in `input`                                                              | -              | file                      |

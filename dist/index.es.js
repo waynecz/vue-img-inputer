@@ -1,57 +1,108 @@
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/**
+ * * Code copied from https://github.com/ElemeFE/element/blob/dev/packages/upload/src/ajax.js
+ */
+function getError(action, option, xhr) {
+  var msg;
+
+  if (xhr.response) {
+    msg = "".concat(xhr.response.error || xhr.response);
+  } else if (xhr.responseText) {
+    msg = "".concat(xhr.responseText);
+  } else {
+    msg = "fail to post ".concat(action, " ").concat(xhr.status);
+  }
+
+  var err = new Error(msg);
+  err.status = xhr.status;
+  err.method = 'post';
+  err.url = action;
+  return err;
+}
+
+function getBody(xhr) {
+  var text = xhr.responseText || xhr.response;
+
+  if (!text) {
+    return text;
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    return text;
+  }
+}
+
+function upload(option) {
+  if (typeof XMLHttpRequest === 'undefined') {
+    return;
+  }
+
+  var xhr = new XMLHttpRequest();
+  var action = option.action;
+
+  if (xhr.upload) {
+    xhr.upload.onprogress = function progress(e) {
+      if (e.total > 0) {
+        e.percent = e.loaded / e.total * 100;
+      }
+
+      option.onProgress(e);
+    };
+  }
+
+  var formData = new FormData();
+
+  if (option.data) {
+    Object.keys(option.data).forEach(function (key) {
+      formData.append(key, option.data[key]);
+    });
+  }
+
+  formData.append(option.filename, option.file, option.file.name);
+
+  xhr.onerror = function error(e) {
+    option.onError(e);
+  };
+
+  xhr.onload = function onload() {
+    if (xhr.status < 200 || xhr.status >= 300) {
+      return option.onError(getError(action, option, xhr));
+    }
+
+    option.onSuccess(getBody(xhr));
+  };
+
+  xhr.open('post', action, true);
+
+  if (option.withCredentials && 'withCredentials' in xhr) {
+    xhr.withCredentials = true;
+  }
+
+  var headers = option.headers || {};
+
+  for (var item in headers) {
+    if (headers.hasOwnProperty(item) && headers[item] !== null) {
+      xhr.setRequestHeader(item, headers[item]);
+    }
+  }
+
+  xhr.send(formData);
+  return xhr;
+}
+
 //
 var script = {
   name: 'vue-img-inputer',
+  // !------------------------ P r o p s --------------------------------------------------------
   props: {
     type: {
       default: 'img',
       type: String
     },
-    // 默认情况下可能会导致选择框弹出慢的问题，请针对具体化图片类型即可解决
+    // * 默认情况下可能会导致选择框弹出慢的问题，请针对具体化图片类型即可解决
     accept: {
-      default: 'image/*,video/*;',
+      default: 'image/*,video/*',
       type: String
     },
     capture: {
@@ -105,7 +156,12 @@ var script = {
       default: '',
       type: String
     },
+    // ! Deprecated, use noHoverEffect instead
     nhe: {
+      type: Boolean,
+      default: false
+    },
+    noHoverEffect: {
       type: Boolean,
       default: false
     },
@@ -120,17 +176,60 @@ var script = {
     name: {
       type: String,
       default: 'file'
+    },
+    // * 文件自动上传功能抄自 Element/Uploader:
+    autoUpload: {
+      type: Boolean,
+      default: false
+    },
+    action: {
+      type: String,
+      default: undefined
+    },
+    uploadKey: {
+      type: String,
+      default: 'file'
+    },
+    extraData: {
+      type: Object,
+      default: {}
+    },
+    headers: {
+      type: Object,
+      default: {}
+    },
+    withCookie: {
+      type: Boolean,
+      default: false
+    },
+    onStart: {
+      default: null,
+      type: Function
+    },
+    onProgress: {
+      default: null,
+      type: Function
+    },
+    onSuccess: {
+      default: null,
+      type: Function
+    },
+    onError: {
+      default: null,
+      type: Function
     }
   },
+  // !------------------------ D a t a --------------------------------------------------------
   data: function data() {
     return {
       inputId: '',
-      file: [],
+      file: null,
       dataUrl: '',
       fileName: '',
       errText: ''
     };
   },
+  // !------------------------ C o m p u t e d --------------------------------------------------------
   computed: {
     imgSelected: function imgSelected() {
       return !!this.dataUrl || !!this.fileName;
@@ -154,10 +253,6 @@ var script = {
     themeClass: function themeClass() {
       return "img-inputer--".concat(this.theme);
     },
-
-    /**
-     * @return {string}
-     */
     ICON: function ICON() {
       var rst = '';
 
@@ -171,14 +266,15 @@ var script = {
     },
     iconUnicode: function iconUnicode() {
       var iconMap = {
-        img: '&#xe624;',
-        clip: '&#xe62d;',
-        img2: '&#xe62f;'
+        img: '&#xe624',
+        clip: '&#xe62d',
+        img2: '&#xe62f'
       };
       return this.customerIcon || iconMap[this.ICON];
     }
   },
-  mounted: function mounted() {
+  // !------------------------ L i f e   c i r c l e --------------------------------------------------------
+  created: function created() {
     var _this = this;
 
     this.inputId = this.id || this.gengerateID();
@@ -186,14 +282,13 @@ var script = {
     if (this.imgSrc) {
       this.dataUrl = this.imgSrc;
     } // 阻止浏览器默认的拖拽时事件
-
-
     ['dragleave', 'drop', 'dragenter', 'dragover'].forEach(function (e) {
       _this.preventDefaultEvent(e);
-    }); // 绑定拖拽时间
+    }); // 绑定拖拽支持
 
     this.addDropSupport();
   },
+  // !------------------------ M e t h o d s --------------------------------------------------------
   methods: {
     preventDefaultEvent: function preventDefaultEvent(eventName) {
       document.addEventListener(eventName, function (e) {
@@ -215,7 +310,7 @@ var script = {
         }
 
         if (fileList.length > 1) {
-          _this2.errText = '暂不支持多文件';
+          _this2.errText = '不支持多文件';
           return false;
         }
 
@@ -242,8 +337,8 @@ var script = {
       } // 双向绑定
 
 
-      this.$emit('input', this.file); // 文件选择回调 && 两种绑定方式
-
+      this.$emit('input', this.file);
+      if (this.autoUpload) this.uploadFile();
       this.onChange && this.onChange(this.file, this.file.name);
       this.$emit('onChange', this.file, this.file.name);
       this.imgPreview(this.file);
@@ -281,8 +376,47 @@ var script = {
       form.reset();
       isLastNode ? parentNode.appendChild(input) : parentNode.insertBefore(input, nextSibling);
       document.body.removeChild(form);
+    },
+    uploadFile: function uploadFile() {
+      var onStart = this.onStart,
+          file = this.file;
+
+      if (!this.action) {
+        this.errText = '上传地址未配置';
+        return;
+      }
+
+      onStart && onStart(file);
+    },
+    post: function post(file) {
+      var _this3 = this;
+
+      var headers = this.headers,
+          withCookie = this.withCookie,
+          extraData = this.extraData,
+          uploadKey = this.uploadKey,
+          action = this.action;
+      var options = {
+        headers: headers,
+        withCredentials: withCookie,
+        file: file,
+        data: extraData,
+        filename: uploadKey,
+        action: action,
+        onProgress: function onProgress(e) {
+          _this3.onProgress(e, file);
+        },
+        onSuccess: function onSuccess(res) {
+          _this3.onSuccess(res, file);
+        },
+        onError: function onError(err) {
+          _this3.onError(err, file);
+        }
+      };
+      var req = upload(options);
     }
   },
+  // !------------------------ W a t c h --------------------------------------------------------
   watch: {
     imgSrc: function imgSrc(newval) {
       this.dataUrl = newval;
@@ -294,7 +428,7 @@ var script = {
       }
     },
     value: function value(newval, oldval) {
-      // 重置逻辑
+      // reset
       if (oldval && !newval) {
         this.file = [];
         this.dataUrl = '';
@@ -319,7 +453,7 @@ var __vue_render__ = function __vue_render__() {
   return _c("div", {
     ref: "box",
     staticClass: "img-inputer",
-    class: [_vm.themeClass, _vm.sizeClass, _vm.nhe ? "nhe" : ""]
+    class: [_vm.themeClass, _vm.sizeClass, _vm.nhe || _vm.noHoverEffect ? "nhe" : ""]
   }, [_c("i", {
     staticClass: "iconfont img-inputer__icon",
     domProps: {
@@ -410,7 +544,7 @@ function __vue_normalize__(template, style, script$$1, scope, functional, module
   var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
   {
-    component.__file = "/Users/wayne/me/vue-img-inputer/src/component/imgInputer.vue";
+    component.__file = "/Users/wayne/me/vue-img-inputer/src/ImgInputer.vue";
   }
 
   if (!component.render) {

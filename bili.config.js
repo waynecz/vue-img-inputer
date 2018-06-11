@@ -3,6 +3,7 @@ const copy = require('rollup-plugin-copied')
 module.exports = {
   plugins: [
     'vue',
+
     copy([
       {
         from: './src/fonts',
@@ -11,10 +12,12 @@ module.exports = {
       }
     ])
   ],
+
   postcss: {
     extract: true,
     extensions: ['.css', '.scss']
   },
+
   format: ['cjs', 'umd', 'es'],
   filename: 'index[suffix].js'
 }

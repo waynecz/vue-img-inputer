@@ -23,8 +23,8 @@
     <imgInputer v-model="file" accept="image/*" readonly noMask imgSrc="http://7xntdk.com1.z0.glb.clouddn.com/12.jpg" @onChange="fileChange"></imgInputer>
     <h1><code>imgSrc="..." readonly noMask</code></h1>
 
-    <imgInputer v-model="file" accept="image/*" nhe @onChange="fileChange"></imgInputer>
-    <h1><code>nhe //no-hover-effect</code></h1>
+    <imgInputer v-model="file" accept="image/*" no-hover-effect @onChange="fileChange"></imgInputer>
+    <h1><code>no-hover-effect</code></h1>
 
     <imgInputer v-model="file" accept="image/*" size="small" @onChange="fileChange"></imgInputer>
     <h1><code>size="small"</code></h1>
@@ -56,56 +56,57 @@
     },
     methods: {
       fileChange(file, name) {
-        console.log('File:', file);
-        console.log('FileName:', name);
+        console.log('File --> ', file);
+        console.log('FileName -->', name);
       }
     }
   }
 </script>
 
 <style>
-  #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-    padding-bottom: 100px
-  }
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+  padding-bottom: 100px;
+}
 
-  .test-inputer {
-    margin-top: 50px
-  }
+.test-inputer {
+  margin-top: 50px;
+}
 
-  code {
-    background: #35495e;
-    padding: 5px 20px;
-    display: inline-block;
-    color: #ffeb59;
-    font-size: 28px;
-    line-height: 1.5;
-    border-radius: 5px
-  }
+code {
+  background: #35495e;
+  padding: 5px 20px;
+  display: inline-block;
+  color: #ffeb59;
+  font-size: 28px;
+  line-height: 1.5;
+  border-radius: 5px;
+}
 
-  h1, h2 {
-    font-weight: 400
-  }
+h1,
+h2 {
+  font-weight: 400;
+}
 
-  ul {
-    list-style-type: none;
-    padding: 0
-  }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-  li {
-    display: inline-block;
-    margin: 0 10px
-  }
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
 
-  a {
-    color: #42b983
-  }
-  .img-inputer {
-    margin-top: 50px;
-  }
+a {
+  color: #42b983;
+}
+.img-inputer {
+  margin-top: 50px;
+}
 </style>
