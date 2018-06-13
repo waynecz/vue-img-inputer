@@ -27,7 +27,7 @@
 
 - 就像 `<input type="file" />`，不支持多图片选择
 - 自动上传功能
--  拖拽选择、预览、也可以当 `<img/>` 使用
+- 拖拽选择、预览、也可以当 `<img/>` 使用
 - 两套主题，其他高度定制
 
 <br>
@@ -151,7 +151,7 @@ Vue.component('ImgInputer', ImgInputer)
     clip / img / img2
 
 5.  **`ali-icon`**: String  
-    如果你用了 [iconfont.cn](http://iconfont.cn/), 可以设置你用  项目里的 icon unicode 值
+    如果你用了 [iconfont.cn](http://iconfont.cn/), 可以设置你项目里的 icon unicode 值
 
 6.  **`no-mask`**: Boolean  
     去除 hover 蒙版
@@ -184,7 +184,7 @@ Vue.component('ImgInputer', ImgInputer)
 <br>
 
 1.  **`reset`**  
-    重置组建的数据，但不重置  `img-src`
+    重置组建的数据，但不重置 `img-src`
 
 <br/>
 </details>
