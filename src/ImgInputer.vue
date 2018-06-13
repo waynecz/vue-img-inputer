@@ -40,6 +40,7 @@
       v-if="capture"
       ref="inputer"
       type="file"
+      v-bind="$attrs"
       :name="name"
       :id="inputId"
       :accept="accept"
@@ -53,6 +54,7 @@
       v-else
       ref="inputer"
       type="file"
+      v-bind="$attrs"
       :name="name"
       :id="inputId"
       :accept="accept"

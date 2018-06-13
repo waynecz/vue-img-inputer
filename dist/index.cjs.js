@@ -102,13 +102,12 @@ var script = {
       default: 'img',
       type: String
     },
-    // * 默认情况下可能会导致选择框弹出慢的问题，请针对具体化图片类型即可解决
     accept: {
       default: 'image/*,video/*',
       type: String
     },
     capture: {
-      default: true,
+      default: false,
       type: Boolean
     },
     id: {
@@ -142,7 +141,7 @@ var script = {
       default: '',
       type: String
     },
-    customerIcon: {
+    aliIcon: {
       default: '',
       type: String
     },
@@ -194,30 +193,30 @@ var script = {
     },
     extraData: {
       type: Object,
-      default: {}
+      default: function _default() {}
     },
     headers: {
       type: Object,
-      default: {}
+      default: function _default() {}
     },
     withCookie: {
       type: Boolean,
       default: false
     },
     onStart: {
-      default: null,
+      default: function _default() {},
       type: Function
     },
     onProgress: {
-      default: null,
+      default: function _default() {},
       type: Function
     },
     onSuccess: {
-      default: null,
+      default: function _default() {},
       type: Function
     },
     onError: {
-      default: null,
+      default: function _default() {},
       type: Function
     }
   },
@@ -228,7 +227,11 @@ var script = {
       file: null,
       dataUrl: '',
       fileName: '',
-      errText: ''
+      errText: '',
+      uploading: false,
+      uploadPercent: 0,
+      uploaded: false,
+      uploadFailed: false
     };
   },
   // !------------------------ C o m p u t e d --------------------------------------------------------
@@ -272,11 +275,17 @@ var script = {
         clip: '&#xe62d',
         img2: '&#xe62f'
       };
-      return this.customerIcon || iconMap[this.ICON];
+      return this.aliIcon || iconMap[this.ICON];
+    },
+    processStyle: function processStyle() {
+      var uploadPercent = this.uploadPercent;
+      return {
+        transform: "translate3d(".concat(uploadPercent - 100, "%, 0, 0)")
+      };
     }
   },
   // !------------------------ L i f e   c i r c l e --------------------------------------------------------
-  created: function created() {
+  mounted: function mounted() {
     var _this = this;
 
     this.inputId = this.id || this.gengerateID();
@@ -389,6 +398,7 @@ var script = {
       }
 
       onStart && onStart(file);
+      this.post(file);
     },
     post: function post(file) {
       var _this3 = this;
@@ -398,6 +408,7 @@ var script = {
           extraData = this.extraData,
           uploadKey = this.uploadKey,
           action = this.action;
+      this.uploading = true;
       var options = {
         headers: headers,
         withCredentials: withCookie,
@@ -406,16 +417,36 @@ var script = {
         filename: uploadKey,
         action: action,
         onProgress: function onProgress(e) {
+          _this3.uploadPercent = ~~e.percent;
+
           _this3.onProgress(e, file);
         },
         onSuccess: function onSuccess(res) {
+          _this3.uploadPercent = 0;
+          _this3.uploading = false;
+          _this3.uploaded = true;
+
           _this3.onSuccess(res, file);
         },
         onError: function onError(err) {
+          _this3.uploadPercent = 0;
+          _this3.uploading = false;
+          _this3.uploadFailed = true;
+
           _this3.onError(err, file);
         }
       };
-      var req = upload(options);
+      upload(options);
+    },
+    reset: function reset() {
+      this.file = null;
+      this.dataUrl = '';
+      this.errText = '';
+      this.fileName = '';
+      this.uploadPercent = 0;
+      this.uploading = false;
+      this.uploaded = false;
+      this.uploadFailed = false;
     }
   },
   // !------------------------ W a t c h --------------------------------------------------------
@@ -424,7 +455,7 @@ var script = {
       this.dataUrl = newval;
 
       if (!newval) {
-        this.file = [];
+        this.file = null;
         this.errText = '';
         this.fileName = '';
       }
@@ -432,10 +463,7 @@ var script = {
     value: function value(newval, oldval) {
       // reset
       if (oldval && !newval) {
-        this.file = [];
-        this.dataUrl = '';
-        this.errText = '';
-        this.fileName = '';
+        this.reset();
       }
     }
   }
@@ -455,7 +483,9 @@ var __vue_render__ = function __vue_render__() {
   return _c("div", {
     ref: "box",
     staticClass: "img-inputer",
-    class: [_vm.themeClass, _vm.sizeClass, _vm.nhe || _vm.noHoverEffect ? "nhe" : ""]
+    class: [_vm.themeClass, _vm.sizeClass, _vm.nhe || _vm.noHoverEffect ? "nhe" : "", {
+      "img-inputer--loading": _vm.uploading
+    }]
   }, [_c("i", {
     staticClass: "iconfont img-inputer__icon",
     domProps: {
@@ -475,7 +505,30 @@ var __vue_render__ = function __vue_render__() {
     attrs: {
       for: _vm.readonly ? "" : _vm.inputId
     }
-  }), _vm._v(" "), _vm.imgSelected && !_vm.noMask ? _c("div", {
+  }), _vm._v(" "), _c("transition", {
+    attrs: {
+      name: "vip-fade"
+    }
+  }, [_vm.uploading ? _c("div", {
+    staticClass: "img-inputer__loading"
+  }, [_c("div", {
+    staticClass: "img-inputer__loading-indicator"
+  }), _vm._v(" "), _c("div", {
+    staticClass: "img-inputer__loading-process",
+    style: _vm.processStyle
+  })]) : _vm._e()]), _vm._v(" "), _c("transition", {
+    attrs: {
+      name: "vip-zoom-in"
+    }
+  }, [_vm.autoUpload && _vm.uploaded ? _c("div", {
+    staticClass: "img-inputer__state success"
+  }) : _vm._e()]), _vm._v(" "), _c("transition", {
+    attrs: {
+      name: "vip-zoom-in"
+    }
+  }, [_vm.autoUpload && _vm.uploadFailed ? _c("div", {
+    staticClass: "img-inputer__state fail"
+  }) : _vm._e()]), _vm._v(" "), _vm.imgSelected && !_vm.noMask ? _c("div", {
     staticClass: "img-inputer__mask"
   }, [_c("p", {
     staticClass: "img-inputer__file-name"
@@ -510,7 +563,7 @@ var __vue_render__ = function __vue_render__() {
     }
   }), _vm._v(" "), _c("transition", {
     attrs: {
-      name: "vip-fade"
+      name: "vip-move-in"
     }
   }, [_vm.errText.length ? _c("div", {
     staticClass: "img-inputer__err"

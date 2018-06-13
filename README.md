@@ -35,7 +35,7 @@
 ## Screenshots
 
 <p align="center">
-  <img src="./src/assets/screenshot.gif"/>
+  <img height="180px" src="./src/assets/screenshot.gif"/>
 </p>
 
 <br>
@@ -61,7 +61,7 @@ Vue.component('ImgInputer', ImgInputer)
 
 ## API
 
-<details><summary><strong>∙ <code>Auto upload</code> related</strong></summary>
+<details><summary><strong><code>Auto upload</code> related</strong></summary>
 <br>
 
 1.  **`auto-uoload`**: Boolean  
@@ -102,7 +102,7 @@ Vue.component('ImgInputer', ImgInputer)
 <br/>
 </details>
 
-<details><summary><strong>∙ <code>Input</code> related</strong></summary>
+<details><summary><strong><code>Input tag</code> related</strong></summary>
 <br>
 
 1.  **`accept`**: String  
@@ -129,10 +129,13 @@ Vue.component('ImgInputer', ImgInputer)
 7.  **`name`**: Boolean  
     name of input tag
 
+8.  **`any input's attribute`**: any
+    any input's origin attributes set for component will inherit by inner input tag
+
 <br/>
 </details>
 
-<details><summary><strong>∙ <code>UI</code> related</strong></summary>
+<details><summary><strong><code>UI</code> related</strong></summary>
 <br>
 
 1.  **`img-src`**: String  
@@ -168,7 +171,7 @@ Vue.component('ImgInputer', ImgInputer)
 <br/>
 </details>
 
-<details><summary><strong>∙ <code>Events</code></strong></summary>
+<details><summary><strong><code>Events</code></strong></summary>
 <br>
 
 1.  **`on-change`**: Function  
@@ -178,7 +181,7 @@ Vue.component('ImgInputer', ImgInputer)
 <br/>
 </details>
 
-<details><summary><strong>∙ <code>Methods</code></strong></summary>
+<details><summary><strong><code>Methods</code></strong></summary>
 <br>
 
 1.  **`reset`**  

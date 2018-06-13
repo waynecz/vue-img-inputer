@@ -3,10 +3,11 @@
   "version": "2.0.0",
   "author": "Waynecz <451578533@qq.com>",
   "license": "MIT",
-  "description": "Elegant img-inputer for Vue2 / 图片输入框, 预览、拖拽、回填、大小限制、可选主题",
+  "description": "A graceful image type inputer / uploader",
   "main": "dist/index.js",
   "scripts": {
     "dev": "./node_modules/poi/bin/cli.js",
+    "demo": "./node_modules/poi/bin/cli.js build",
     "build": "rm -rf ./dist && ./node_modules/bili/dist/cli.js"
   },
   "repository": {
