@@ -59,50 +59,40 @@ Vue.component('ImgInputer', ImgInputer)
 
 #### ∙ `Auto upload` related
 
-1.  **`auto-uoload`**  
-    **type**: Boolean  
-    **intro**: set to enable auto-upload
+1.  **`auto-uoload`**: Boolean  
+    set to enable auto-upload
 
-2.  **`action`**  
-    **type**: String  
-    **intro**: request URL
+2.  **`action`**: String  
+    upload request URL
 
-3.  **`upload-key`**  
-    **type**: String  
+3.  **`upload-key`**: String  
     **default**: `'file'`  
-    **intro**: key name in form-data
+    key name in form-data
 
-4.  **`extra-data`**  
-    **type**: Object  
-    **intro**: extra data append in request's form-data
+4.  **`extra-data`**: Object  
+    extra data append in request's form-data
 
-5.  **`headers`**  
-    **type**: Object  
-    **intro**: set additional headers of request
+5.  **`headers`**: Object  
+    set additional headers of request
 
-6.  **`with-cookie`**  
-    **type**: Boolean  
-    **intro**: whether cookies will send
+6.  **`with-cookie`**: Boolean  
+    whether cookies will send
 
-7.  **`on-start`**  
-    **type**: Function  
+7.  **`on-start`**: Function  
     **params**: `func(file)`  
-    **intro**: hook function when upload start
+    hook function when upload start
 
-8.  **`on-progress`**  
-    **type**: Function  
+8.  **`on-progress`**: Function  
     **params**: `func(event, file)`  
-    **intro**: hook function when uploading, get progress by `event.percent`
+    hook function when uploading, get progress by `event.percent`
 
-9.  **`on-success`**  
-    **type**: Function  
+9.  **`on-success`**: Function  
     **params**: `func(res, file)`  
-    **intro**: hook function when upload success, `res` is response from server
+    hook function when upload success, `res` is response from server
 
-10. **`on-error`**  
-    **type**: Function  
+10. **`on-error`**: Function  
     **params**: `func(err, file)`  
-    **intro**: hook function when upload failed
+    hook function when upload failed
 
 #### ∙ `Input` related
 
