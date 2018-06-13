@@ -34,6 +34,10 @@
 
 ## Screenshots
 
+<p align="center">
+  <img src="./src/assets/screenshot.gif"/>
+</p>
+
 <br>
 
 ## Install and Usage
