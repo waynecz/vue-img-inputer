@@ -1,2 +1,4 @@
-import VueImgInputer from './component/imgInputer.vue';
-export default VueImgInputer;
+import ImgInputer from './ImgInputer.vue'
+import './style/index.scss'
+
+export default ImgInputer

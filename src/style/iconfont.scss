@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'iconfont';
+  src: url('./fonts/iconfont.eot?t=1487650731256');
+  src: url('./fonts/iconfont.eot?t=1487650731256#iefix') format('embedded-opentype'),
+    url('./fonts/iconfont.woff?t=1487650731256') format('woff'),
+    url('./fonts/iconfont.ttf?t=1487650731256') format('truetype'),
+    url('./fonts/iconfont.svg?t=1487650731256#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-accessory:before {
+  content: '\e62d';
+}
+
+.icon-tupian2:before {
+  content: '\e62f';
+}
+
+.icon-shangchuan:before {
+  content: '\e6a5';
+}
+
+.icon-tupian:before {
+  content: '\e624';
+}
