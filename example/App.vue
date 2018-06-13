@@ -5,6 +5,9 @@
     <imgInputer v-model="file" accept="image/*" @onChange="fileChange"></imgInputer>
     <h1><code>default</code></h1>
 
+    <imgInputer auto-upload action="//jsonplaceholder.typicode.com/posts/" :on-error="onErr" v-model="file" accept="image/*.jpeg" @onChange="fileChange"></imgInputer>
+    <h1><code>auto-upload</code></h1>
+
     <imgInputer v-model="file" accept="image/*" icon="img" @onChange="fileChange"></imgInputer>
     <h1><code>icon="img"</code></h1>
 
@@ -40,24 +43,33 @@
 
   export default {
     name: 'app',
+
     components: {
       Hello
     },
+
     data() {
       return {
         file: null,
         cloudImg: ''
       };
     },
+
     mounted() {
       setTimeout(() => {
         this.cloudImg = 'http://7xntdk.com1.z0.glb.clouddn.com/2.jpg';
       }, 2000);
     },
+
     methods: {
       fileChange(file, name) {
         console.log('File --> ', file);
         console.log('FileName -->', name);
+      },
+
+      onErr(err, file) {
+        console.log('​onErr -> file', file);
+        console.log('​onErr -> err', err);
       }
     }
   }

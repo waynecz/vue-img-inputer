@@ -6,7 +6,7 @@ module.exports = {
 
     copy([
       {
-        from: './src/fonts',
+        from: './src/style/fonts',
         to: './dist/fonts',
         emitFiles: true
       }

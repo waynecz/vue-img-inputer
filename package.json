@@ -6,6 +6,7 @@
   "description": "Elegant img-inputer for Vue2 / 图片输入框, 预览、拖拽、回填、大小限制、可选主题",
   "main": "dist/index.js",
   "scripts": {
+    "dev": "./node_modules/poi/bin/cli.js",
     "build": "rm -rf ./dist && ./node_modules/bili/dist/cli.js"
   },
   "repository": {
@@ -35,9 +36,11 @@
     "eslint-plugin-standard": "^3.1.0",
     "eslint-plugin-vue": "^4.5.0",
     "node-sass": "^4.9.0",
+    "poi": "^10.2.7",
     "rollup-plugin-copied": "^0.0.2",
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-vue": "^4.2.0",
+    "sass-loader": "^7.0.3",
     "vue-template-compiler": "^2.5.16"
   },
   "engines": {

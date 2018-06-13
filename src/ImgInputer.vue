@@ -1,5 +1,11 @@
 <template>
-  <div class="img-inputer" :class="[themeClass, sizeClass, nhe || noHoverEffect ? 'nhe': '' ]" ref="box">
+  <div class="img-inputer" :class="[
+      themeClass,
+      sizeClass,
+      nhe || noHoverEffect ? 'nhe' : '',
+      { 'img-inputer--loading': uploading }
+    ]" ref="box">
+
     <i class="iconfont img-inputer__icon" v-html="iconUnicode"></i>
     <p class="img-inputer__placeholder">{{placeholder}}</p>
 
@@ -7,42 +13,56 @@
       <img :src="dataUrl" class="img-inputer__preview-img">
     </div>
     <label :for="readonly ? '' : inputId" class="img-inputer__label"></label>
-    <!-- 图片或文件选择后鼠标移入的提示-->
+    
+    <transition name="vip-fade">
+      <div class="img-inputer__loading" v-if="uploading">
+        <div class="img-inputer__loading-indicator"/>
+        <div class="img-inputer__loading-process" :style="processStyle"/>
+      </div>
+    </transition>
+
+    <transition name="vip-zoom-in">
+      <div v-if="autoUpload && uploaded" class="img-inputer__success"/>
+    </transition>
+
+    <!-- Mask -->
     <div class="img-inputer__mask" v-if="imgSelected && !noMask">
       <p class="img-inputer__file-name">{{fileName}}</p>
       <p class="img-inputer__change" v-if="readonly">{{readonlyTipText}}</p>
       <p class="img-inputer__change" v-else>{{bottomText}}</p>
     </div>
-    <!-- input主体-->
+    
     <input
-        v-if="capture"
-        ref="inputer"
-        type="file"
-        :name="name"
-        :id="inputId"
-        :accept="accept"
-        capture="video"
-        class="img-inputer__inputer"
-        @change="handleFileChange"
+      v-if="capture"
+      ref="inputer"
+      type="file"
+      :name="name"
+      :id="inputId"
+      :accept="accept"
+      capture="video"
+      class="img-inputer__inputer"
+      @change="handleFileChange"
     />
 
+    <!-- Alternative for no capture-->
     <input
-        v-else
-        ref="inputer"
-        type="file"
-        :name="name"
-        :id="inputId"
-        :accept="accept"
-        class="img-inputer__inputer"
-        @change="handleFileChange"
+      v-else
+      ref="inputer"
+      type="file"
+      :name="name"
+      :id="inputId"
+      :accept="accept"
+      class="img-inputer__inputer"
+      @change="handleFileChange"
     />
-    <transition name="vip-fade">
+    <transition name="vip-move-in">
       <div class="img-inputer__err" v-if="errText.length">{{errText}}</div>
     </transition>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 import ajax from './ajax'
 
 export default {
@@ -54,13 +74,12 @@ export default {
       default: 'img',
       type: String
     },
-    // * 默认情况下可能会导致选择框弹出慢的问题，请针对具体化图片类型即可解决
     accept: {
       default: 'image/*,video/*',
       type: String
     },
     capture: {
-      default: true,
+      default: false,
       type: Boolean
     },
     id: {
@@ -110,6 +129,7 @@ export default {
       default: '',
       type: String
     },
+
     // ! Deprecated, use noHoverEffect instead
     nhe: {
       type: Boolean,
@@ -147,30 +167,30 @@ export default {
     },
     extraData: {
       type: Object,
-      default: {}
+      default: () => {}
     },
     headers: {
       type: Object,
-      default: {}
+      default: () => {}
     },
     withCookie: {
       type: Boolean,
       default: false
     },
     onStart: {
-      default: null,
+      default: () => {},
       type: Function
     },
     onProgress: {
-      default: null,
+      default: () => {},
       type: Function
     },
     onSuccess: {
-      default: null,
+      default: () => {},
       type: Function
     },
     onError: {
-      default: null,
+      default: () => {},
       type: Function
     }
   },
@@ -182,7 +202,11 @@ export default {
       file: null,
       dataUrl: '',
       fileName: '',
-      errText: ''
+      errText: '',
+
+      uploading: false,
+      uploadPercent: 0,
+      uploaded: false
     }
   },
 
@@ -229,11 +253,18 @@ export default {
         img2: '&#xe62f'
       }
       return this.customerIcon || iconMap[this.ICON]
+    },
+
+    processStyle() {
+      const { uploadPercent } = this
+      return {
+        transform: `translate3d(${uploadPercent - 100}%, 0, 0)`
+      }
     }
   },
 
   // !------------------------ L i f e   c i r c l e --------------------------------------------------------
-  created() {
+  mounted() {
     this.inputId = this.id || this.gengerateID()
 
     if (this.imgSrc) {
@@ -374,6 +405,7 @@ export default {
 
     post(file) {
       const { headers, withCookie, extraData, uploadKey, action } = this
+      this.uploading = true
 
       const options = {
         headers: headers,
@@ -384,20 +416,35 @@ export default {
         action,
 
         onProgress: e => {
-          console.log('​post -> e', e.percent)
+          this.uploadPercent = ~~e.percent
           this.onProgress(e, file)
         },
 
         onSuccess: res => {
+          this.uploadPercent = 0
+          this.uploading = false
+          this.uploaded = true
           this.onSuccess(res, file)
         },
 
         onError: err => {
+          this.uploadPercent = 0
+          this.uploading = false
           this.onError(err, file)
         }
       }
 
-      const req = ajax(options)
+      ajax(options)
+    },
+
+    resetData() {
+      this.file = null
+      this.dataUrl = ''
+      this.errText = ''
+      this.fileName = ''
+      this.uploadPercent = 0
+      this.uploading = false
+      this.uploaded = false
     }
   },
 
@@ -407,7 +454,7 @@ export default {
       this.dataUrl = newval
 
       if (!newval) {
-        this.file = []
+        this.file = null
         this.errText = ''
         this.fileName = ''
       }
@@ -416,10 +463,7 @@ export default {
     value(newval, oldval) {
       // reset
       if (oldval && !newval) {
-        this.file = []
-        this.dataUrl = ''
-        this.errText = ''
-        this.fileName = ''
+        this.resetData()
       }
     }
   }
