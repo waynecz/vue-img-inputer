@@ -94,25 +94,51 @@
     }
   }
 
-  &__success {
+  &__state {
     position: absolute;
     top: 13px;
     left: 13px;
-    background: rgb(16, 201, 77);
     border-radius: 50%;
     width: 16px;
     z-index: 2;
     height: 16px;
 
-    &::after {
-      position: absolute;
-      content: '';
-      top: 5px;
-      left: 3px;
-      width: 10px;
-      height: 5px;
-      box-shadow: 4px 0 0 -2px #fff inset, 0 -4px 0 -2px #fff inset;
-      transform: translateY(-0.5px) rotate(-45deg);
+    &.success {
+      background: rgb(16, 201, 77);
+
+      &::after {
+        position: absolute;
+        content: '';
+        top: 5px;
+        left: 3px;
+        width: 10px;
+        height: 5px;
+        box-shadow: 4px 0 0 -2px #fff inset, 0 -4px 0 -2px #fff inset;
+        transform: translateY(-0.5px) rotate(-45deg);
+      }
+    }
+
+    &.fail {
+      background: #e55;
+      &::after,
+      &::before {
+        position: absolute;
+        content: '';
+        display: block;
+        width: 8px;
+        height: 2px;
+        background: #fff;
+        top: 50%;
+        left: 50%;
+      }
+
+      &::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      &::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
     }
   }
 
@@ -244,14 +270,13 @@
 .vip-zoom-in {
   &-enter-active,
   &-leave-active {
-    transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: scale(0);
+    transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
     will-change: trnsform;
   }
   &-enter,
   &-leave-active {
-    opacity: 0;
-    transform: scale(1);
+    transform: scale(0);
   }
 }
 

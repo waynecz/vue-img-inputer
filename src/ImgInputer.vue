@@ -22,7 +22,11 @@
     </transition>
 
     <transition name="vip-zoom-in">
-      <div v-if="autoUpload && uploaded" class="img-inputer__success"/>
+      <div v-if="autoUpload && uploaded" class="img-inputer__state success"/>
+    </transition>
+
+    <transition name="vip-zoom-in">
+      <div v-if="autoUpload && uploadFailed" class="img-inputer__state fail"/>
     </transition>
 
     <!-- Mask -->
@@ -113,7 +117,7 @@ export default {
       default: '',
       type: String
     },
-    customerIcon: {
+    aliIcon: {
       default: '',
       type: String
     },
@@ -206,7 +210,8 @@ export default {
 
       uploading: false,
       uploadPercent: 0,
-      uploaded: false
+      uploaded: false,
+      uploadFailed: false
     }
   },
 
@@ -252,7 +257,7 @@ export default {
         clip: '&#xe62d',
         img2: '&#xe62f'
       }
-      return this.customerIcon || iconMap[this.ICON]
+      return this.aliIcon || iconMap[this.ICON]
     },
 
     processStyle() {
@@ -430,6 +435,7 @@ export default {
         onError: err => {
           this.uploadPercent = 0
           this.uploading = false
+          this.uploadFailed = true
           this.onError(err, file)
         }
       }
@@ -445,6 +451,7 @@ export default {
       this.uploadPercent = 0
       this.uploading = false
       this.uploaded = false
+      this.uploadFailed = false
     }
   },
 
