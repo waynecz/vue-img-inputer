@@ -1,14 +1,14 @@
-<<br>
+<br>
 
 <p align="center">
-  <img width="200px" src="./src/assets/vip-logo.png" alt="vip" />
+  <img width="250px" src="./src/assets/vip-logo.png" alt="vip" />
 </p>
 <br>
 
 <p align="center">
   <img alt="GitHub release" src="https://img.shields.io/badge/release-v2.0.0-orange.svg?style=for-the-badge"/>
   <img alt="poi" src="https://img.shields.io/badge/poi-10-green.svg?style=for-the-badge"/>
-  <img alt="Bili" src="https://img.shields.io/badge/bili-3-pink.svg?style=for-the-badge"/>
+  <img alt="Bili" src="https://img.shields.io/badge/bili-3-blue.svg?style=for-the-badge"/>
 </p>
 
 <br>
@@ -30,11 +30,13 @@
 - drop-select / preview / use as `<img />` as well
 - optional skins
 
+<br>
+
 ## Screenshots
 
 <br>
 
-## Install
+## Install and Usage
 
 ```bash
 npm install vue-img-inputer
@@ -47,8 +49,6 @@ import 'vue-img-inputer/dist/index.css'
 Vue.component('ImgInputer', ImgInputer)
 ```
 
-## Usage
-
 ```html
 <img-inputer v-model="file" theme="light" size="large"/>
 ```
@@ -59,13 +59,50 @@ Vue.component('ImgInputer', ImgInputer)
 
 #### ∙ `Auto upload` related
 
-- **name**: `auto-uoload`  
-  **type**: String  
-  **default**: `false`  
-  **description**: wheather enable auto-upload feature
+1.  `auto-uoload`  
+    type: Boolean  
+    intro: set to enable auto-upload
 
-- name: `action`
-  type: **String**
+2.  `action`  
+    type: String  
+    intro: request URL
+
+3.  `upload-key`  
+    type: String  
+    default: `'file'`  
+    intro: key name in form-data
+
+4.  `extra-data`  
+    type: Object  
+    intro: extra data append in request's form-data
+
+5.  `headers`  
+    type: Object  
+    intro: set additional headers of request
+
+6.  `with-cookie`  
+    type: Boolean  
+    intro: whether cookies will send
+
+7.  `on-start`  
+    type: Function  
+    params: `func(file)`  
+    intro: hook function when upload start
+
+8.  `on-progress`  
+    type: Function  
+    params: `func(event, file)`  
+    intro: hook function when uploading, get progress by `event.percent`
+
+9.  `on-success`  
+    type: Function  
+    params: `func(res, file)`  
+    intro: hook function when upload success, `res` is response from server
+
+10. `on-error`  
+    type: Function  
+    params: `func(err, file)`  
+    intro: hook function when upload failed
 
 #### ∙ `Input` related
 

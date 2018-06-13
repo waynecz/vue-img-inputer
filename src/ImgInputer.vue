@@ -437,7 +437,7 @@ export default {
       ajax(options)
     },
 
-    resetData() {
+    reset() {
       this.file = null
       this.dataUrl = ''
       this.errText = ''
@@ -463,7 +463,7 @@ export default {
     value(newval, oldval) {
       // reset
       if (oldval && !newval) {
-        this.resetData()
+        this.reset()
       }
     }
   }
