@@ -60,49 +60,49 @@ Vue.component('ImgInputer', ImgInputer)
 #### ∙ `Auto upload` related
 
 1.  **`auto-uoload`**  
-    _type_: Boolean  
-    _intro_: set to enable auto-upload
+    **type**: Boolean  
+    **intro**: set to enable auto-upload
 
 2.  **`action`**  
-    _type_: String  
-    _intro_: request URL
+    **type**: String  
+    **intro**: request URL
 
 3.  **`upload-key`**  
-    _type_: String  
-    _default_: `'file'`  
-    intro: key name in form-data
+    **type**: String  
+    **default**: `'file'`  
+    **intro**: key name in form-data
 
 4.  **`extra-data`**  
-    _type_: Object  
-    _intro_: extra data append in request's form-data
+    **type**: Object  
+    **intro**: extra data append in request's form-data
 
 5.  **`headers`**  
-    _type_: Object  
-    _intro_: set additional headers of request
+    **type**: Object  
+    **intro**: set additional headers of request
 
 6.  **`with-cookie`**  
-    _type_: Boolean  
-    _intro_: whether cookies will send
+    **type**: Boolean  
+    **intro**: whether cookies will send
 
 7.  **`on-start`**  
-    _type_: Function  
-    _params_: `func(file)`  
-    intro: hook function when upload start
+    **type**: Function  
+    **params**: `func(file)`  
+    **intro**: hook function when upload start
 
 8.  **`on-progress`**  
-    _type_: Function  
-    _params_: `func(event, file)`  
-    intro: hook function when uploading, get progress by `event.percent`
+    **type**: Function  
+    **params**: `func(event, file)`  
+    **intro**: hook function when uploading, get progress by `event.percent`
 
 9.  **`on-success`**  
-    _type_: Function  
-    _params_: `func(res, file)`  
-    intro: hook function when upload success, `res` is response from server
+    **type**: Function  
+    **params**: `func(res, file)`  
+    **intro**: hook function when upload success, `res` is response from server
 
 10. **`on-error`**  
-    _type_: Function  
-    _params_: `func(err, file)`  
-    intro: hook function when upload failed
+    **type**: Function  
+    **params**: `func(err, file)`  
+    **intro**: hook function when upload failed
 
 #### ∙ `Input` related
 
