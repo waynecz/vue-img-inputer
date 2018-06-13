@@ -1,7 +1,7 @@
 <br>
 
 <p align="center">
-  <img width="250px" src="./src/assets/vip-logo.png" alt="vip" />
+  <img width="300px" src="./src/assets/vip-logo.png" alt="vip" />
 </p>
 <br>
 
@@ -57,7 +57,7 @@ Vue.component('ImgInputer', ImgInputer)
 
 ## API
 
-#### ∙ `Auto upload` related
+<details><h4>∙ <code>Auto upload</code> related</h4><br>
 
 1.  **`auto-uoload`**: Boolean  
     set to enable auto-upload
@@ -79,20 +79,23 @@ Vue.component('ImgInputer', ImgInputer)
     whether cookies will send
 
 7.  **`on-start`**: Function  
-    **params**: `func(file)`  
+    **params**: func(file)  
     hook function when upload start
 
 8.  **`on-progress`**: Function  
-    **params**: `func(event, file)`  
+    **params**: func(event, file)  
     hook function when uploading, get progress by `event.percent`
 
 9.  **`on-success`**: Function  
-    **params**: `func(res, file)`  
+    **params**: func(res, file)  
     hook function when upload success, `res` is response from server
 
 10. **`on-error`**: Function  
-    **params**: `func(err, file)`  
+    **params**: func(err, file)  
     hook function when upload failed
+
+<br/>
+</details>
 
 #### ∙ `Input` related
 
