@@ -129,7 +129,7 @@ Vue.component('ImgInputer', ImgInputer)
 7.  **`name`**: Boolean  
     name of input tag
 
-8.  **`any input's attribute`**: any
+8.  **`any input's attribute`**: any  
     any input's origin attributes set for component will inherit by inner input tag
 
 <br/>
