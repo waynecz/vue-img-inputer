@@ -15,7 +15,7 @@
 
 <p align="center">
   <b>
-    <a href="https://segmentfault.com/a/1190000008503338">教程：从 0 开始做一个文件选择(上传)组件</a>
+    <a href="https://segmentfault.com/a/1190000008503338">教程: 从0开始做一个文件选择(上传)组件</a>
     |
     <a href="http://waynecz.github.io/VueImgInputer/index.html">查看 Demo</a>
   </b>
@@ -128,13 +128,13 @@ Vue.component('ImgInputer', ImgInputer)
 7.  **`name`**: Boolean  
     原生 name 属性
 
-8.  **`任意 input 的原生属性`**: any
+8.  **`任意 input 的原生属性`**: any  
     任意 input 的原生属性都将继承给内部的 input 标签
 
 <br/>
 </details>
 
-<details><summary><strong><code>视觉 </code> related</strong></summary>
+<details><summary><strong><code>视觉 </code> 相关</strong></summary>
 <br>
 
 1.  **`img-src`**: String  
