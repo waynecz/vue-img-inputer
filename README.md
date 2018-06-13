@@ -57,7 +57,8 @@ Vue.component('ImgInputer', ImgInputer)
 
 ## API
 
-<details><h4>∙ <code>Auto upload</code> related</h4><br>
+<details><summary><h4>∙ <code>Auto upload</code> related</h4></summary>
+<br>
 
 1.  **`auto-uoload`**: Boolean  
     set to enable auto-upload
