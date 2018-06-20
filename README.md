@@ -26,7 +26,7 @@
 ## Intro
 
 - `<input type="file" />` like, only support single image
-- auto-upload
+- auto-upload support
 - drop-select / preview / use as `<img />` as well
 - optional skins
 
