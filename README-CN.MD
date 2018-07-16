@@ -61,7 +61,7 @@ Vue.component('ImgInputer', ImgInputer)
 
 ## 接口
 
-<details><summary><strong><code>自动上传</code> 相关</strong></summary>
+<details open><summary><strong><code>自动上传</code> 相关</strong></summary>
 <br>
 
 1.  **`auto-uoload`**: Boolean  
