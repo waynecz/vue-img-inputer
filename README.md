@@ -24,6 +24,8 @@
 <br>
 
 ## Intro
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwaynecz%2Fvue-img-inputer.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwaynecz%2Fvue-img-inputer?ref=badge_shield)
+
 
 - `<input type="file" />` like, only support single image
 - auto-upload support
@@ -189,3 +191,7 @@ Vue.component('ImgInputer', ImgInputer)
 
 <br/>
 </details>
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwaynecz%2Fvue-img-inputer.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwaynecz%2Fvue-img-inputer?ref=badge_large)
