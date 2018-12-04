@@ -6,7 +6,7 @@
 <br>
 
 <p align="center">
-  <img alt="GitHub release" src="https://img.shields.io/badge/release-v2.0.0-orange.svg?style=for-the-badge"/>
+  <img alt="GitHub release" src="https://img.shields.io/badge/release-v2.1.0-orange.svg?style=for-the-badge"/>
   <img alt="poi" src="https://img.shields.io/badge/poi-10-green.svg?style=for-the-badge"/>
   <img alt="Bili" src="https://img.shields.io/badge/bili-3-blue.svg?style=for-the-badge"/>
 </p>
@@ -64,7 +64,7 @@ Vue.component('ImgInputer', ImgInputer)
 <details open><summary><strong><code>自动上传</code> 相关</strong></summary>
 <br>
 
-1.  **`auto-uoload`**: Boolean  
+1.  **`auto-upload`**: Boolean  
     设置开启自动上传功能
 
 2.  **`action`**: String  

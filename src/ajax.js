@@ -1,5 +1,5 @@
 /**
- * * Code copied from https://github.com/ElemeFE/element/blob/dev/packages/upload/src/ajax.js
+ * Code copied from https://github.com/ElemeFE/element/blob/dev/packages/upload/src/ajax.js
  */
 
 function getError(action, option, xhr) {

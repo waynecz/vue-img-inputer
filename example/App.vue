@@ -1,105 +1,168 @@
 <template>
   <div id="app">
-    <img class="logo" width="400" src="../src/assets/vip-logo.png">
+    <img
+      class="logo"
+      width="400"
+      src="../src/assets/vip-logo.png"
+    >
 
     <Hello></Hello>
 
     <section class="wrapper">
       <div class="item">
-        <imgInputer v-model="file" accept="image/*" @onChange="fileChange"></imgInputer>
+        <ImgInputer
+          v-model="file"
+          accept="image/*"
+          @onChange="fileChange"
+        ></ImgInputer>
         <h1><code>default</code></h1>
       </div>
 
       <div class="item">
-        <imgInputer auto-upload action="//jsonplaceholder.typicode.com/posts/" :on-error="onErr" v-model="file" accept="image/*.jpeg" @onChange="fileChange"></imgInputer>
+        <ImgInputer
+          auto-upload
+          action="//jsonplaceholder.typicode.com/posts/"
+          :on-error="onErr"
+          v-model="file"
+          accept="image/*.jpeg"
+          @onChange="fileChange"
+        >
+        </ImgInputer>
         <h1><code>auto-upload</code></h1>
       </div>
 
       <div class="item">
-        <imgInputer v-model="file" accept="image/*" icon="img" @onChange="fileChange"></imgInputer>
+        <ImgInputer
+          v-model="file"
+          accept="image/*"
+          icon="img"
+          @onChange="fileChange"
+        ></ImgInputer>
         <h1><code>icon="img"</code></h1>
       </div>
 
       <div class="item">
-        <imgInputer v-model="file" accept="image/*" theme="light" @onChange="fileChange"></imgInputer>
+        <ImgInputer
+          v-model="file"
+          accept="image/*"
+          theme="light"
+          @onChange="fileChange"
+        ></ImgInputer>
         <h1><code>theme="light"</code></h1>
       </div>
 
       <div class="item">
-        <imgInputer v-model="file" accept="image/*" placeholder="请选择身份证" @onChange="fileChange"></imgInputer>
+        <ImgInputer
+          v-model="file"
+          accept="image/*"
+          placeholder="请选择身份证"
+          @onChange="fileChange"
+        ></ImgInputer>
         <h1><code>placeholder="..."</code></h1>
       </div>
 
       <div class="item">
-        <imgInputer v-model="file" accept="image/*" :imgSrc="cloudImg" @onChange="fileChange"></imgInputer>
+        <ImgInputer
+          v-model="file"
+          accept="image/*"
+          :imgSrc="cloudImg"
+          @onChange="fileChange"
+        ></ImgInputer>
         <h1><code>img-src="..."</code></h1>
       </div>
 
       <div class="item">
-        <imgInputer v-model="file" accept="image/*" readonly imgSrc="http://7xntdk.com1.z0.glb.clouddn.com/11.jpg" @onChange="fileChange"></imgInputer>
+        <ImgInputer
+          v-model="file"
+          accept="image/*"
+          readonly
+          imgSrc="https://images.unsplash.com/photo-1543868067-52959e8eef59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"
+          @onChange="fileChange"
+        ></ImgInputer>
         <h1><code>readonly</code></h1>
       </div>
 
       <div class="item">
-        <imgInputer v-model="file" accept="image/*" readonly noMask imgSrc="http://7xntdk.com1.z0.glb.clouddn.com/12.jpg" @onChange="fileChange"></imgInputer>
+        <ImgInputer
+          v-model="file"
+          accept="image/*"
+          readonly
+          noMask
+          imgSrc="https://images.unsplash.com/photo-1468233748640-b31327627610?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=732&q=80"
+          @onChange="fileChange"
+        ></ImgInputer>
         <h1><code>no-mask</code></h1>
       </div>
 
       <div class="item">
-        <imgInputer v-model="file" accept="image/*" no-hover-effect @onChange="fileChange"></imgInputer>
+        <ImgInputer
+          v-model="file"
+          accept="image/*"
+          no-hover-effect
+          @onChange="fileChange"
+        ></ImgInputer>
         <h1><code>no-hover-effect</code></h1>
       </div>
 
       <div class="item">
-         <imgInputer v-model="file" accept="image/*" size="small" @onChange="fileChange"></imgInputer>
+        <ImgInputer
+          v-model="file"
+          accept="image/*"
+          size="small"
+          @onChange="fileChange"
+        ></ImgInputer>
         <h1><code>size="small"</code></h1>
       </div>
 
       <div class="item">
-        <imgInputer v-model="file" accept="image/*" size="large" @onChange="fileChange"></imgInputer>
+        <ImgInputer
+          v-model="file"
+          accept="image/*"
+          size="large"
+          @onChange="fileChange"
+        ></ImgInputer>
         <h1><code>size="large"</code></h1>
       </div>
     </section>
-  
 
   </div>
 </template>
 
 <script>
-  import Hello from './components/Hello'
+import Hello from "./components/Hello";
 
-  export default {
-    name: 'app',
+export default {
+  name: "app",
 
-    components: {
-      Hello
+  components: {
+    Hello
+  },
+
+  data() {
+    return {
+      file: null,
+      cloudImg: ""
+    };
+  },
+
+  mounted() {
+    setTimeout(() => {
+      this.cloudImg = "https://images.unsplash.com/photo-1519734019-1cc9bdc4f806?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80";
+    }, 2000);
+  },
+
+  methods: {
+    fileChange(file, name) {
+      console.log("File --> ", file);
+      console.log("FileName -->", name);
     },
 
-    data() {
-      return {
-        file: null,
-        cloudImg: ''
-      };
-    },
-
-    mounted() {
-      setTimeout(() => {
-        this.cloudImg = 'http://7xntdk.com1.z0.glb.clouddn.com/2.jpg';
-      }, 2000);
-    },
-
-    methods: {
-      fileChange(file, name) {
-        console.log('File --> ', file);
-        console.log('FileName -->', name);
-      },
-
-      onErr(err, file) {
-        console.log('​onErr -> file', file);
-        console.log('​onErr -> err', err);
-      }
+    onErr(err, file) {
+      console.log("​onErr -> file", file);
+      console.log("​onErr -> err", err);
     }
   }
+};
 </script>
 
 <style>

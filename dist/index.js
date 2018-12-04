@@ -5,7 +5,7 @@
 }(this, (function () { 'use strict';
 
   /**
-   * * Code copied from https://github.com/ElemeFE/element/blob/dev/packages/upload/src/ajax.js
+   * Code copied from https://github.com/ElemeFE/element/blob/dev/packages/upload/src/ajax.js
    */
   function getError(action, option, xhr) {
     var msg;
@@ -99,15 +99,15 @@
 
   //
   var script = {
-    name: 'vue-img-inputer',
+    name: "VueImgInputer",
     // !------------------------ P r o p s --------------------------------------------------------
     props: {
       type: {
-        default: 'img',
+        default: "img",
         type: String
       },
       accept: {
-        default: 'image/*,video/*',
+        default: "image/*,video/*",
         type: String
       },
       capture: {
@@ -115,7 +115,7 @@
         type: Boolean
       },
       id: {
-        default: '',
+        default: "",
         type: String
       },
       onChange: {
@@ -127,26 +127,34 @@
         default: false
       },
       readonlyTipText: {
-        default: '不可更改',
+        default: "不可更改",
         type: String
       },
       bottomText: {
-        default: '点击或拖拽图片以修改',
+        default: "点击或拖拽图片以修改",
+        type: String
+      },
+      hoverText: {
+        default: "点击或拖拽图片以修改",
         type: String
       },
       placeholder: {
-        default: '点击或拖拽选择图片',
+        default: "点击或拖拽选择图片",
         type: String
       },
       value: {
         default: undefined
       },
       icon: {
-        default: '',
+        default: "",
         type: String
       },
       aliIcon: {
-        default: '',
+        default: "",
+        type: String
+      },
+      customIconClass: {
+        default: "",
         type: String
       },
       maxSize: {
@@ -154,11 +162,11 @@
         type: Number
       },
       size: {
-        default: '',
+        default: "",
         type: String
       },
       imgSrc: {
-        default: '',
+        default: "",
         type: String
       },
       // ! Deprecated, use noHoverEffect instead
@@ -176,13 +184,13 @@
       },
       theme: {
         type: String,
-        default: ''
+        default: ""
       },
       name: {
         type: String,
-        default: 'file'
+        default: "file"
       },
-      // * 文件自动上传功能抄自 Element/Uploader:
+      // 文件自动上传功能抄自 Element/Uploader:
       autoUpload: {
         type: Boolean,
         default: false
@@ -193,7 +201,7 @@
       },
       uploadKey: {
         type: String,
-        default: 'file'
+        default: "file"
       },
       extraData: {
         type: Object,
@@ -227,11 +235,11 @@
     // !------------------------ D a t a --------------------------------------------------------
     data: function data() {
       return {
-        inputId: '',
+        inputId: "",
         file: null,
-        dataUrl: '',
-        fileName: '',
-        errText: '',
+        dataUrl: "",
+        fileName: "",
+        errText: "",
         uploading: false,
         uploadPercent: 0,
         uploaded: false,
@@ -247,9 +255,9 @@
         var rst = 0;
 
         if (this.maxSize < 1024) {
-          rst = this.maxSize + 'K';
+          rst = this.maxSize + "K";
         } else {
-          rst = (this.maxSize / 1024).toFixed(this.maxSize % 1024 > 0 ? 2 : 0) + 'M';
+          rst = (this.maxSize / 1024).toFixed(this.maxSize % 1024 > 0 ? 2 : 0) + "M";
         }
 
         return rst;
@@ -263,23 +271,18 @@
         return "img-inputer--".concat(this.theme);
       },
       ICON: function ICON() {
-        var rst = '';
+        var rst = "";
+        var theme = this.theme,
+            icon = this.icon,
+            autoUpload = this.autoUpload;
 
-        if (this.icon) {
-          rst = this.icon;
+        if (icon) {
+          rst = icon;
         } else {
-          rst = this.theme === 'light' ? 'img' : 'clip';
+          rst = theme === "light" ? "img-light" : autoUpload ? "upload" : "clip";
         }
 
         return rst;
-      },
-      iconUnicode: function iconUnicode() {
-        var iconMap = {
-          img: '&#xe624',
-          clip: '&#xe62d',
-          img2: '&#xe62f'
-        };
-        return this.aliIcon || iconMap[this.ICON];
       },
       processStyle: function processStyle() {
         var uploadPercent = this.uploadPercent;
@@ -297,7 +300,9 @@
       if (this.imgSrc) {
         this.dataUrl = this.imgSrc;
       } // 阻止浏览器默认的拖拽时事件
-      ['dragleave', 'drop', 'dragenter', 'dragover'].forEach(function (e) {
+
+
+      ["dragleave", "drop", "dragenter", "dragover"].forEach(function (e) {
         _this.preventDefaultEvent(e);
       }); // 绑定拖拽支持
 
@@ -314,10 +319,10 @@
         var _this2 = this;
 
         var BOX = this.$refs.box;
-        BOX.addEventListener('drop', function (e) {
+        BOX.addEventListener("drop", function (e) {
           e.preventDefault();
           if (_this2.readonly) return false;
-          _this2.errText = '';
+          _this2.errText = "";
           var fileList = e.dataTransfer.files;
 
           if (fileList.length === 0) {
@@ -325,7 +330,7 @@
           }
 
           if (fileList.length > 1) {
-            _this2.errText = '不支持多文件';
+            _this2.errText = "不支持多文件";
             return false;
           }
 
@@ -342,8 +347,8 @@
         }
       },
       handleFileChange: function handleFileChange(e) {
-        if (typeof e.target === 'undefined') this.file = e[0];else this.file = e.target.files[0];
-        this.errText = '';
+        if (typeof e.target === "undefined") this.file = e[0];else this.file = e.target.files[0];
+        this.errText = "";
         var size = Math.floor(this.file.size / 1024);
 
         if (size > this.maxSize) {
@@ -352,10 +357,10 @@
         } // 双向绑定
 
 
-        this.$emit('input', this.file);
+        this.$emit("input", this.file);
         if (this.autoUpload) this.uploadFile();
         this.onChange && this.onChange(this.file, this.file.name);
-        this.$emit('onChange', this.file, this.file.name);
+        this.$emit("onChange", this.file, this.file.name);
         this.imgPreview(this.file);
         this.fileName = this.file.name;
         this.resetInput();
@@ -375,7 +380,7 @@
       },
       resetInput: function resetInput() {
         var input = document.getElementById(this.inputId);
-        var form = document.createElement('form');
+        var form = document.createElement("form");
         document.body.appendChild(form);
         var parentNode = input.parentNode; // 判断input 是否为最后一个节点
 
@@ -397,7 +402,7 @@
             file = this.file;
 
         if (!this.action) {
-          this.errText = '上传地址未配置';
+          this.errText = "上传地址未配置";
           return;
         }
 
@@ -444,9 +449,9 @@
       },
       reset: function reset() {
         this.file = null;
-        this.dataUrl = '';
-        this.errText = '';
-        this.fileName = '';
+        this.dataUrl = "";
+        this.errText = "";
+        this.fileName = "";
         this.uploadPercent = 0;
         this.uploading = false;
         this.uploaded = false;
@@ -460,8 +465,8 @@
 
         if (!newval) {
           this.file = null;
-          this.errText = '';
-          this.fileName = '';
+          this.errText = "";
+          this.fileName = "";
         }
       },
       value: function value(newval, oldval) {
@@ -474,211 +479,64 @@
   };
 
   /* script */
-  var __vue_script__ = script;
+              const __vue_script__ = script;
+              
   /* template */
-
-  var __vue_render__ = function __vue_render__() {
-    var _vm = this;
-
-    var _h = _vm.$createElement;
-
-    var _c = _vm._self._c || _h;
-
-    return _c("div", {
-      ref: "box",
-      staticClass: "img-inputer",
-      class: [_vm.themeClass, _vm.sizeClass, _vm.nhe || _vm.noHoverEffect ? "nhe" : "", {
-        "img-inputer--loading": _vm.uploading
-      }]
-    }, [_c("i", {
-      staticClass: "iconfont img-inputer__icon",
-      domProps: {
-        innerHTML: _vm._s(_vm.iconUnicode)
-      }
-    }), _vm._v(" "), _c("p", {
-      staticClass: "img-inputer__placeholder"
-    }, [_vm._v(_vm._s(_vm.placeholder))]), _vm._v(" "), _vm.imgSelected ? _c("div", {
-      staticClass: "img-inputer__preview-box"
-    }, [_c("img", {
-      staticClass: "img-inputer__preview-img",
-      attrs: {
-        src: _vm.dataUrl
-      }
-    })]) : _vm._e(), _vm._v(" "), _c("label", {
-      staticClass: "img-inputer__label",
-      attrs: {
-        for: _vm.readonly ? "" : _vm.inputId
-      }
-    }), _vm._v(" "), _c("transition", {
-      attrs: {
-        name: "vip-fade"
-      }
-    }, [_vm.uploading ? _c("div", {
-      staticClass: "img-inputer__loading"
-    }, [_c("div", {
-      staticClass: "img-inputer__loading-indicator"
-    }), _vm._v(" "), _c("div", {
-      staticClass: "img-inputer__loading-process",
-      style: _vm.processStyle
-    })]) : _vm._e()]), _vm._v(" "), _c("transition", {
-      attrs: {
-        name: "vip-zoom-in"
-      }
-    }, [_vm.autoUpload && _vm.uploaded ? _c("div", {
-      staticClass: "img-inputer__state success"
-    }) : _vm._e()]), _vm._v(" "), _c("transition", {
-      attrs: {
-        name: "vip-zoom-in"
-      }
-    }, [_vm.autoUpload && _vm.uploadFailed ? _c("div", {
-      staticClass: "img-inputer__state fail"
-    }) : _vm._e()]), _vm._v(" "), _vm.imgSelected && !_vm.noMask ? _c("div", {
-      staticClass: "img-inputer__mask"
-    }, [_c("p", {
-      staticClass: "img-inputer__file-name"
-    }, [_vm._v(_vm._s(_vm.fileName))]), _vm._v(" "), _vm.readonly ? _c("p", {
-      staticClass: "img-inputer__change"
-    }, [_vm._v(_vm._s(_vm.readonlyTipText))]) : _c("p", {
-      staticClass: "img-inputer__change"
-    }, [_vm._v(_vm._s(_vm.bottomText))])]) : _vm._e(), _vm._v(" "), _vm.capture ? _c("input", {
-      ref: "inputer",
-      staticClass: "img-inputer__inputer",
-      attrs: {
-        type: "file",
-        name: _vm.name,
-        id: _vm.inputId,
-        accept: _vm.accept,
-        capture: "video"
-      },
-      on: {
-        change: _vm.handleFileChange
-      }
-    }) : _c("input", {
-      ref: "inputer",
-      staticClass: "img-inputer__inputer",
-      attrs: {
-        type: "file",
-        name: _vm.name,
-        id: _vm.inputId,
-        accept: _vm.accept
-      },
-      on: {
-        change: _vm.handleFileChange
-      }
-    }), _vm._v(" "), _c("transition", {
-      attrs: {
-        name: "vip-move-in"
-      }
-    }, [_vm.errText.length ? _c("div", {
-      staticClass: "img-inputer__err"
-    }, [_vm._v(_vm._s(_vm.errText))]) : _vm._e()])], 1);
-  };
-
+  var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"box",staticClass:"img-inputer",class:[
+      _vm.themeClass,
+      _vm.sizeClass,
+      _vm.nhe || _vm.noHoverEffect ? 'nhe' : '',
+      { 'img-inputer--loading': _vm.uploading }
+    ]},[(_vm.ICON && !_vm.customIconClass)?_c('i',{staticClass:"img-inputer__icon",class:("ico ico-" + _vm.ICON)}):_vm._e(),_vm._v(" "),(_vm.customIconClass)?_c('i',{staticClass:"img-inputer__icon",class:_vm.customIconClass}):_vm._e(),_vm._v(" "),(!_vm.icon && !_vm.customIconClass)?_vm._t("icon"):_vm._e(),_vm._v(" "),_c('p',{staticClass:"img-inputer__placeholder"},[_vm._v(_vm._s(_vm.placeholder))]),_vm._v(" "),(_vm.imgSelected)?_c('div',{staticClass:"img-inputer__preview-box"},[_c('img',{staticClass:"img-inputer__preview-img",attrs:{"src":_vm.dataUrl}})]):_vm._e(),_vm._v(" "),_c('label',{staticClass:"img-inputer__label",attrs:{"for":_vm.readonly ? '' : _vm.inputId}}),_vm._v(" "),_c('transition',{attrs:{"name":"vip-fade"}},[(_vm.uploading)?_c('div',{staticClass:"img-inputer__loading"},[_c('div',{staticClass:"img-inputer__loading-indicator"}),_vm._v(" "),_c('div',{staticClass:"img-inputer__loading-process",style:(_vm.processStyle)})]):_vm._e()]),_vm._v(" "),_c('transition',{attrs:{"name":"vip-zoom-in"}},[(_vm.autoUpload && _vm.uploaded)?_c('div',{staticClass:"img-inputer__state success"}):_vm._e()]),_vm._v(" "),_c('transition',{attrs:{"name":"vip-zoom-in"}},[(_vm.autoUpload && _vm.uploadFailed)?_c('div',{staticClass:"img-inputer__state fail"}):_vm._e()]),_vm._v(" "),(_vm.imgSelected && !_vm.noMask)?_c('div',{staticClass:"img-inputer__mask"},[_c('p',{staticClass:"img-inputer__file-name"},[_vm._v(_vm._s(_vm.fileName))]),_vm._v(" "),(_vm.readonly)?_c('p',{staticClass:"img-inputer__change"},[_vm._v(_vm._s(_vm.readonlyTipText))]):_c('p',{staticClass:"img-inputer__change"},[_vm._v(_vm._s(_vm.bottomText))])]):_vm._e(),_vm._v(" "),(_vm.capture)?_c('input',_vm._b({ref:"inputer",staticClass:"img-inputer__inputer",attrs:{"type":"file","name":_vm.name,"id":_vm.inputId,"accept":_vm.accept,"capture":"video"},on:{"change":_vm.handleFileChange}},'input',_vm.$attrs,false)):_c('input',_vm._b({ref:"inputer",staticClass:"img-inputer__inputer",attrs:{"type":"file","name":_vm.name,"id":_vm.inputId,"accept":_vm.accept},on:{"change":_vm.handleFileChange}},'input',_vm.$attrs,false)),_vm._v(" "),_c('transition',{attrs:{"name":"vip-move-in"}},[(_vm.errText.length)?_c('div',{staticClass:"img-inputer__err"},[_vm._v(_vm._s(_vm.errText))]):_vm._e()])],2)};
   var __vue_staticRenderFns__ = [];
-  __vue_render__._withStripped = true;
 
-  var __vue_template__ = typeof __vue_render__ !== 'undefined' ? {
-    render: __vue_render__,
-    staticRenderFns: __vue_staticRenderFns__
-  } : {};
-  /* style */
+    /* style */
+    const __vue_inject_styles__ = undefined;
+    /* scoped */
+    const __vue_scope_id__ = undefined;
+    /* module identifier */
+    const __vue_module_identifier__ = undefined;
+    /* functional template */
+    const __vue_is_functional_template__ = false;
+    /* component normalizer */
+    function __vue_normalize__(
+      template, style, script$$1,
+      scope, functional, moduleIdentifier,
+      createInjector, createInjectorSSR
+    ) {
+      const component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
+      // For security concerns, we use only base name in production mode.
+      component.__file = "index.vue";
 
-  var __vue_inject_styles__ = undefined;
-  /* scoped */
+      if (!component.render) {
+        component.render = template.render;
+        component.staticRenderFns = template.staticRenderFns;
+        component._compiled = true;
 
+        if (functional) component.functional = true;
+      }
 
-  var __vue_scope_id__ = undefined;
-  /* module identifier */
+      component._scopeId = scope;
 
-
-  var __vue_module_identifier__ = undefined;
-  /* functional template */
-
-
-  var __vue_is_functional_template__ = false;
-  /* component normalizer */
-
-  function __vue_normalize__(template, style, script$$1, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-    var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
-
-    {
-      component.__file = "/Users/wayne/me/vue-img-inputer/src/ImgInputer.vue";
+      return component
     }
-
-    if (!component.render) {
-      component.render = template.render;
-      component.staticRenderFns = template.staticRenderFns;
-      component._compiled = true;
-      if (functional) component.functional = true;
-    }
-
-    component._scopeId = scope;
-
+    /* style inject */
+    
+    /* style inject SSR */
     
 
-    return component;
-  }
-  /* style inject */
-
-
-  function __vue_create_injector__() {
-    var head = document.head || document.getElementsByTagName('head')[0];
-    var styles = __vue_create_injector__.styles || (__vue_create_injector__.styles = {});
-    var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-    return function addStyle(id, css) {
-      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
-
-      var group = isOldIE ? css.media || 'default' : id;
-      var style = styles[group] || (styles[group] = {
-        ids: [],
-        parts: [],
-        element: undefined
-      });
-
-      if (!style.ids.includes(id)) {
-        var code = css.source;
-        var index = style.ids.length;
-        style.ids.push(id);
-
-        if (isOldIE) {
-          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
-        }
-
-        if (!style.element) {
-          var el = style.element = document.createElement('style');
-          el.type = 'text/css';
-          if (css.media) el.setAttribute('media', css.media);
-
-          if (isOldIE) {
-            el.setAttribute('data-group', group);
-            el.setAttribute('data-next-index', '0');
-          }
-
-          head.appendChild(el);
-        }
-
-        if (isOldIE) {
-          index = parseInt(style.element.getAttribute('data-next-index'));
-          style.element.setAttribute('data-next-index', index + 1);
-        }
-
-        if (style.element.styleSheet) {
-          style.parts.push(code);
-          style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
-        } else {
-          var textNode = document.createTextNode(code);
-          var nodes = style.element.childNodes;
-          if (nodes[index]) style.element.removeChild(nodes[index]);
-          if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-        }
-      }
-    };
-  }
-  /* style inject SSR */
-
-
-  var ImgInputer = __vue_normalize__(__vue_template__, __vue_inject_styles__, typeof __vue_script__ === 'undefined' ? {} : __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, typeof __vue_create_injector__ !== 'undefined' ? __vue_create_injector__ : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
+    
+    var ImgInputer = __vue_normalize__(
+      { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+      __vue_inject_styles__,
+      __vue_script__,
+      __vue_scope_id__,
+      __vue_is_functional_template__,
+      __vue_module_identifier__,
+      undefined,
+      undefined
+    );
 
   return ImgInputer;
 

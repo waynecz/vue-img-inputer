@@ -2,7 +2,7 @@ import Vue from 'vue/dist/vue.esm'
 import App from './App'
 import imgInputer from '../src/index.js'
 
-Vue.component('imgInputer', imgInputer)
+Vue.component('ImgInputer', imgInputer)
 
 /* eslint-disable no-new */
 new Vue({

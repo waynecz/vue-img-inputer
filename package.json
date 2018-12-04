@@ -1,14 +1,14 @@
 {
   "name": "vue-img-inputer",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": "waynecz <451578533@qq.com>",
   "license": "MIT",
   "description": "A graceful image type inputer / uploader",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "./node_modules/poi/bin/cli.js",
-    "demo": "./node_modules/poi/bin/cli.js build",
-    "build": "rm -rf ./dist && ./node_modules/bili/dist/cli.js"
+    "dev": "npx poi",
+    "demo": "npx poi build",
+    "build": "rm -rf ./dist && npx bili"
   },
   "repository": {
     "type": "git",
@@ -45,8 +45,8 @@
     "vue-template-compiler": "^2.5.16"
   },
   "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
+    "node": ">= 8.0.0",
+    "npm": ">= 6.0.0"
   },
   "browserslist": [
     "> 1%",
