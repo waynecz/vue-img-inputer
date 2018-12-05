@@ -8,7 +8,7 @@
   "module": "dist/index.es.js",
   "scripts": {
     "dev": "poi example/index --serve",
-    "demo": "poi example/index -d example/dist --prod",
+    "demo": "poi example/index -d example/dist --prod --public-url ./",
     "build": "rm -rf ./dist && bili"
   },
   "files": [
