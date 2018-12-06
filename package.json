@@ -5,11 +5,15 @@
   "license": "MIT",
   "description": "A graceful image type inputer / uploader",
   "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "scripts": {
-    "dev": "npx poi",
-    "demo": "npx poi build",
-    "build": "rm -rf ./dist && npx bili"
+    "dev": "poi example/index --serve",
+    "demo": "poi example/index -d example/dist --prod --public-url ./",
+    "build": "rm -rf ./dist && bili"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/waynecz/vue-img-inputer"
@@ -28,6 +32,7 @@
     "vue": "^2.5.2"
   },
   "devDependencies": {
+    "autoprefixer": "^9.4.2",
     "babel-eslint": "^8.2.3",
     "bili": "^3.1.2",
     "eslint-config-standard": "^11.0.0",
@@ -37,11 +42,12 @@
     "eslint-plugin-standard": "^3.1.0",
     "eslint-plugin-vue": "^4.5.0",
     "node-sass": "^4.9.0",
-    "poi": "^10.2.7",
+    "poi": "^12.0.0-beta.6",
     "rollup-plugin-copied": "^0.0.2",
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-vue": "^4.2.0",
-    "sass-loader": "^7.0.3",
+    "sass-loader": "^7.1.0",
+    "vue": "^2.5.17",
     "vue-template-compiler": "^2.5.16"
   },
   "engines": {

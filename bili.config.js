@@ -12,12 +12,7 @@ module.exports = {
       }
     ])
   ],
-
-  postcss: {
-    extract: true,
-    extensions: ['.css', '.scss']
-  },
-
+  
   format: ['cjs', 'umd', 'es'],
   filename: 'index[suffix].js'
 }

@@ -1,9 +1,0 @@
-.DS_Store
-node_modules
-.vscode
-example
-demo
-yarn.lock
-yarn-error.log
-.eslintignore
-.eslintrc.js
