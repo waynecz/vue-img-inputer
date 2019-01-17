@@ -1,0 +1,36 @@
+{
+  "preReleaseId": null,
+  "pkgFiles": ["package.json"],
+  "use": "git.tag",
+  "scripts": {
+    "beforeStart": null,
+    "beforeBump": null,
+    "afterBump": null,
+    "beforeStage": null,
+    "changelog": "git log --pretty=format:\"* %s (%h)\" [REV_RANGE]",
+    "afterRelease": null
+  },
+  "git": {
+    "requireCleanWorkingDir": false,
+    "requireUpstream": false,
+    "addUntrackedFiles": false,
+    "commit": true,
+    "commitMessage": "build(release): ${version}",
+    "commitArgs": "",
+    "tag": true,
+    "tagName": "${version}",
+    "tagAnnotation": "Release ${version}",
+    "tagArgs": "",
+    "push": true,
+    "pushArgs": "",
+    "pushRepo": "origin"
+  },
+  "prompt": {
+    "commit": true,
+    "tag": true,
+    "push": true,
+    "ghRelease": true,
+    "glRelease": false,
+    "publish": true
+  }
+}

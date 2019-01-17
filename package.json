@@ -7,9 +7,10 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
-    "dev": "poi example/index --serve",
-    "demo": "poi example/index -d example/dist --prod --public-url ./",
-    "build": "rm -rf ./dist && bili"
+    "dev": "npx poi",
+    "demo": "npx poi build",
+    "release": "npx release-it",
+    "build": "rm -rf ./dist && npx bili"
   },
   "files": [
     "dist"
@@ -42,7 +43,8 @@
     "eslint-plugin-standard": "^3.1.0",
     "eslint-plugin-vue": "^4.5.0",
     "node-sass": "^4.9.0",
-    "poi": "^12.0.0-beta.6",
+    "poi": "^10.2.7",
+    "release-it": "^9.8.1",
     "rollup-plugin-copied": "^0.0.2",
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-vue": "^4.2.0",

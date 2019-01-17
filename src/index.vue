@@ -19,7 +19,10 @@ index<template>
       class="img-inputer__icon"
       :class="customIconClass"
     />
-    <slot v-if="!icon && !customIconClass" name="icon" />
+    <slot
+      v-if="!icon && !customIconClass"
+      name="icon"
+    />
     <p class="img-inputer__placeholder">{{placeholder}}</p>
 
     <div
@@ -117,6 +120,36 @@ index<template>
 /* eslint-disable */
 import ajax from "./ajax";
 
+const isZhCN = _ =>
+  (navigator.language || navigator.browserLanguage).includes("zh");
+
+const lang = !isZhCN ? "zh" : "en";
+
+const TRANSLATIONS = {
+  readonlyTipText: { zh: "不可更改", en: "Readonly" },
+  bottomText: {
+    zh: "点击或拖拽图片以修改",
+    en: "Drop file here or click to change"
+  },
+  hoverText: {
+    zh: "点击或拖拽图片以修改",
+    en: "Drop file here or click to change"
+  },
+  placeholder: {
+    zh: "点击或拖拽选择图片",
+    en: "Drop file here or click"
+  },
+  noMultipleFileMsg: { zh: "不支持多文件", en: "Not support multiple files" },
+  exceedSizeMsg: {
+    zh: "文件大小不能超过",
+    en: "The size of file should less than: "
+  },
+  noActionUrlMsg: {
+    zh: "上传地址未配置",
+    en: "Action hasn't set up yet"
+  }
+};
+
 export default {
   name: "VueImgInputer",
 
@@ -147,19 +180,19 @@ export default {
       default: false
     },
     readonlyTipText: {
-      default: "不可更改",
+      default: TRANSLATIONS.readonlyTipText[lang],
       type: String
     },
     bottomText: {
-      default: "点击或拖拽图片以修改",
+      default: TRANSLATIONS.bottomText[lang],
       type: String
     },
     hoverText: {
-      default: "点击或拖拽图片以修改",
+      default: TRANSLATIONS.hoverText[lang],
       type: String
     },
     placeholder: {
-      default: "点击或拖拽选择图片",
+      default: TRANSLATIONS.placeholder[lang],
       type: String
     },
     value: {
@@ -361,7 +394,7 @@ export default {
         }
 
         if (fileList.length > 1) {
-          this.errText = "不支持多文件";
+          this.errText = TRANSLATIONS.noMultipleFileMsg[lang];
           return false;
         }
 
@@ -387,7 +420,7 @@ export default {
       this.errText = "";
       let size = Math.floor(this.file.size / 1024);
       if (size > this.maxSize) {
-        this.errText = `文件大小不能超过${this.sizeHumanRead}`;
+        this.errText = `${TRANSLATIONS.exceedSizeMsg[lang]}${this.sizeHumanRead}`;
         return false;
       }
 
@@ -451,7 +484,7 @@ export default {
     uploadFile() {
       const { onStart, file } = this;
       if (!this.action) {
-        this.errText = "上传地址未配置";
+        this.errText = TRANSLATIONS.noActionUrlMsg[lang];
         return;
       }
 
