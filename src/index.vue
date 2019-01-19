@@ -179,6 +179,18 @@ export default {
       type: Boolean,
       default: false
     },
+    noMultipleText: {
+      default: TRANSLATIONS.noMultipleFileMsg[lang],
+      type: String
+    },
+    exceedSizeText: {
+      default: TRANSLATIONS.exceedSizeMsg[lang],
+      type: String
+    },
+    noActionText: {
+      default: TRANSLATIONS.noActionUrlMsg[lang],
+      type: String
+    },
     readonlyTipText: {
       default: TRANSLATIONS.readonlyTipText[lang],
       type: String
@@ -394,7 +406,7 @@ export default {
         }
 
         if (fileList.length > 1) {
-          this.errText = TRANSLATIONS.noMultipleFileMsg[lang];
+          this.errText = this.noMultipleText;
           return false;
         }
 
@@ -420,7 +432,7 @@ export default {
       this.errText = "";
       let size = Math.floor(this.file.size / 1024);
       if (size > this.maxSize) {
-        this.errText = `${TRANSLATIONS.exceedSizeMsg[lang]}${this.sizeHumanRead}`;
+        this.errText = `${this.exceedSizeText}${this.sizeHumanRead}`;
         return false;
       }
 
@@ -484,7 +496,7 @@ export default {
     uploadFile() {
       const { onStart, file } = this;
       if (!this.action) {
-        this.errText = TRANSLATIONS.noActionUrlMsg[lang];
+        this.errText = this.noActionText;
         return;
       }
 

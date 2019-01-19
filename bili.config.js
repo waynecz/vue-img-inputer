@@ -12,7 +12,7 @@ module.exports = {
       }
     ])
   ],
-  
+
   format: ['cjs', 'umd', 'es'],
   filename: 'index[suffix].js'
 }

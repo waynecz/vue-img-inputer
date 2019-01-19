@@ -110,7 +110,7 @@ Vue.component('ImgInputer', ImgInputer)
     suggest to set a specific value like `image/jpg,image/gif;` for wildcard will lead to a serious delay
 
 2.  **`placeholder`**: String  
-    **default**: `点击或拖拽选择图片`
+    **default**: `Drop file here or click`
 
 3.  **`id`**: String  
     **default**: random string in 4 length  
@@ -161,11 +161,23 @@ Vue.component('ImgInputer', ImgInputer)
     remove all hover effect (include text) when hover
 
 8.  **`bottom-text`**: String  
-    **default**: `点击或拖拽图片以修改`  
+    **default**: `Drop file here or click to change`  
     text in the bottom when hover
 
-9.  **`readonly-tip-text`**: String  
-    **default**: `不可更改`  
+9.  **`no-multiple-text`**: String  
+    **default**: `Not support multiple files`  
+    visible only the state is `readonly`, cover bottom-text
+
+10.  **`exceed-size-text`**: String  
+    **default**: `The size of file should less than: ${maxSize}`  
+    visible only the state is `readonly`, cover bottom-text
+
+11.  **`no-action-text`**: String  
+    **default**: `Action hasn't set up yet`  
+    visible only the state is `readonly`, cover bottom-text
+
+12.  **`readonly-tip-text`**: String  
+    **default**: `Readonly`  
     visible only the state is `readonly`, cover bottom-text
 
 <br/>
