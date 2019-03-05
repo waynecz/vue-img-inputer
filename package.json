@@ -1,6 +1,6 @@
 {
   "name": "vue-img-inputer",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "author": "waynecz <451578533@qq.com>",
   "license": "MIT",
   "description": "A graceful image type inputer / uploader",
