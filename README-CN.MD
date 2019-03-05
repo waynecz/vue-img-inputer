@@ -177,6 +177,10 @@ Vue.component('ImgInputer', ImgInputer)
     **params**: func ( file, fileName )  
     文件更改时的钩子函数
 
+2.  **`onExceed`**: Function  
+    **params**: func ( file )  
+    文件超出最大设置时的钩子函数
+
 <br/>
 </details>
 

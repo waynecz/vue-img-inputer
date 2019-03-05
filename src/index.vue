@@ -433,6 +433,7 @@ export default {
       let size = Math.floor(this.file.size / 1024);
       if (size > this.maxSize) {
         this.errText = `${this.exceedSizeText}${this.sizeHumanRead}`;
+        this.$emit("onExceed", this.file);
         return false;
       }
 

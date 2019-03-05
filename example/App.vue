@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-    <img
-      class="logo"
-      width="400"
-      src="../src/assets/vip-logo.png"
-    >
+    <img class="logo" width="400" src="../src/assets/vip-logo.png">
 
     <Hello></Hello>
 
@@ -13,9 +9,13 @@
         <ImgInputer
           v-model="file"
           accept="image/*"
+          :maxSize="500"
+          @onExceed="exceedHandler"
           @onChange="fileChange"
         ></ImgInputer>
-        <h1><code>default</code></h1>
+        <h1>
+          <code>default</code>
+        </h1>
       </div>
 
       <div class="item">
@@ -26,49 +26,38 @@
           v-model="file"
           accept="image/*.jpeg"
           @onChange="fileChange"
-        >
-        </ImgInputer>
-        <h1><code>auto-upload</code></h1>
+        ></ImgInputer>
+        <h1>
+          <code>auto-upload</code>
+        </h1>
       </div>
 
       <div class="item">
-        <ImgInputer
-          v-model="file"
-          accept="image/*"
-          icon="img"
-          @onChange="fileChange"
-        ></ImgInputer>
-        <h1><code>icon="img"</code></h1>
+        <ImgInputer v-model="file" accept="image/*" icon="img" @onChange="fileChange"></ImgInputer>
+        <h1>
+          <code>icon="img"</code>
+        </h1>
       </div>
 
       <div class="item">
-        <ImgInputer
-          v-model="file"
-          accept="image/*"
-          theme="light"
-          @onChange="fileChange"
-        ></ImgInputer>
-        <h1><code>theme="light"</code></h1>
+        <ImgInputer v-model="file" accept="image/*" theme="light" @onChange="fileChange"></ImgInputer>
+        <h1>
+          <code>theme="light"</code>
+        </h1>
       </div>
 
       <div class="item">
-        <ImgInputer
-          v-model="file"
-          accept="image/*"
-          placeholder="请选择身份证"
-          @onChange="fileChange"
-        ></ImgInputer>
-        <h1><code>placeholder="..."</code></h1>
+        <ImgInputer v-model="file" accept="image/*" placeholder="请选择身份证" @onChange="fileChange"></ImgInputer>
+        <h1>
+          <code>placeholder="..."</code>
+        </h1>
       </div>
 
       <div class="item">
-        <ImgInputer
-          v-model="file"
-          accept="image/*"
-          :imgSrc="cloudImg"
-          @onChange="fileChange"
-        ></ImgInputer>
-        <h1><code>img-src="..."</code></h1>
+        <ImgInputer v-model="file" accept="image/*" :imgSrc="cloudImg" @onChange="fileChange"></ImgInputer>
+        <h1>
+          <code>img-src="..."</code>
+        </h1>
       </div>
 
       <div class="item">
@@ -79,7 +68,9 @@
           imgSrc="https://images.unsplash.com/photo-1543868067-52959e8eef59?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"
           @onChange="fileChange"
         ></ImgInputer>
-        <h1><code>readonly</code></h1>
+        <h1>
+          <code>readonly</code>
+        </h1>
       </div>
 
       <div class="item">
@@ -91,40 +82,32 @@
           imgSrc="https://images.unsplash.com/photo-1468233748640-b31327627610?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=732&q=80"
           @onChange="fileChange"
         ></ImgInputer>
-        <h1><code>no-mask</code></h1>
+        <h1>
+          <code>no-mask</code>
+        </h1>
       </div>
 
       <div class="item">
-        <ImgInputer
-          v-model="file"
-          accept="image/*"
-          no-hover-effect
-          @onChange="fileChange"
-        ></ImgInputer>
-        <h1><code>no-hover-effect</code></h1>
+        <ImgInputer v-model="file" accept="image/*" no-hover-effect @onChange="fileChange"></ImgInputer>
+        <h1>
+          <code>no-hover-effect</code>
+        </h1>
       </div>
 
       <div class="item">
-        <ImgInputer
-          v-model="file"
-          accept="image/*"
-          size="small"
-          @onChange="fileChange"
-        ></ImgInputer>
-        <h1><code>size="small"</code></h1>
+        <ImgInputer v-model="file" accept="image/*" size="small" @onChange="fileChange"></ImgInputer>
+        <h1>
+          <code>size="small"</code>
+        </h1>
       </div>
 
       <div class="item">
-        <ImgInputer
-          v-model="file"
-          accept="image/*"
-          size="large"
-          @onChange="fileChange"
-        ></ImgInputer>
-        <h1><code>size="large"</code></h1>
+        <ImgInputer v-model="file" accept="image/*" size="large" @onChange="fileChange"></ImgInputer>
+        <h1>
+          <code>size="large"</code>
+        </h1>
       </div>
     </section>
-
   </div>
 </template>
 
@@ -147,7 +130,8 @@ export default {
 
   mounted() {
     setTimeout(() => {
-      this.cloudImg = "https://images.unsplash.com/photo-1519734019-1cc9bdc4f806?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80";
+      this.cloudImg =
+        "https://images.unsplash.com/photo-1519734019-1cc9bdc4f806?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80";
     }, 2000);
   },
 
@@ -160,6 +144,10 @@ export default {
     onErr(err, file) {
       console.log("​onErr -> file", file);
       console.log("​onErr -> err", err);
+    },
+
+    exceedHandler(file) {
+      console.warn("onExceed -> file", file);
     }
   }
 };

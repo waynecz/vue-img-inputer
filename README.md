@@ -186,9 +186,13 @@ Vue.component('ImgInputer', ImgInputer)
 <details><summary><strong><code>Events</code></strong></summary>
 <br>
 
-1.  **`on-change`**: Function  
+1.  **`onChange`**: Function  
     **params**: func ( file, fileName )  
     hook function when file selected
+
+2.  **`onExceed`**: Function  
+    **params**: func ( file )  
+    hook function when file exceed max-size
 
 <br/>
 </details>
