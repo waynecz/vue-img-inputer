@@ -1,4 +1,4 @@
-index<template>
+<template>
   <div
     class="img-inputer"
     :class="[
